@@ -1,0 +1,19 @@
+{
+    "overwrite": false,
+    "backup": false,
+    "interface": false,
+    "private": true,
+    "auto": true,
+    "ignore": true,
+    "exclude": "/^.*config\\.php$/",
+    "include": "/^.*\\.php$/",
+    "dirs": {
+        "src/Reggora/Entity": "tests/Reggora/Entity"
+    },
+    "files": [],
+    "phpdoc": {
+        "author": "Lynn Digital LLC <sales@lynndigital.com)",
+          "copyright": "2019 Reggora, Inc",
+        "license": "https://opensource.org/licenses/MIT The MIT license."
+    }
+}

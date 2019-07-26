@@ -16,5 +16,9 @@
         "psr-0": {
             "Reggora": "src/"
         }
+    },
+    "require-dev": {
+        "paulthebaud/phpunit-generator": "2.0",
+        "symfony/yaml": "^4.3"
     }
 }
