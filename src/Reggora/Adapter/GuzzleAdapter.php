@@ -18,22 +18,87 @@ class GuzzleAdapter {
 		$this->client = new Client([
 			'base_uri' => Reggora::BASE_API_URI,
 			'headers' => [
-				'Authorization' => sprintf('Bearer %s', $token),
+				'Authorization' => sprintf('Bearer %s', $authToken),
 				'integration' => $integrationToken,
 			],
 		]);
 	}
 
-    public function get(String $url, Array $params = []) : String
-    { //todo: handle errors
-        return (string) $this->client->get($url, ['query' => $params])->getBody();
+    private function get(String $url, Array $params = [])
+    {
+        return $this->client->get($url, ['query' => $params]);
     }
 
-    public function post(String $url, $content = '') : String
-    {//todo: handle errors
+    private function post(String $url, $content = '')
+    {
         $options = [];
         $options[is_array($content) ? 'json' : 'body'] = $content;
 
-        return (string) $this->client->post($url, $options)->getBody();
+        return $this->client->post($url, $options);
+    }
+
+    private function delete(String $url, Array $params = [])
+    {
+        return $this->client->delete($url, ['query' => $params]);
+    }
+
+    private function put(String $url, $content = '')
+    {
+        $options = [];
+        $options[is_array($content) ? 'json' : 'body'] = $content;
+
+        return $this->client->put($url, $options);
+    }
+
+    public static function authenticateLender(String $email, String $password)
+    {
+    	$tempClient = new Client([
+			'base_uri' => Reggora::BASE_API_URI,
+		]);
+
+        return json_decode(
+            (string) $tempClient->post('lender/auth', [
+                'json' => [
+                    'username' => $email,
+                    'password' => $password,
+                ]
+            ])->getBody(),
+            true
+        );
+    }
+
+    private static function authenticateVendor(String $email, String $password)
+    {
+    	$tempClient = new Client([
+			'base_uri' => Reggora::BASE_API_URI,
+		]);
+
+		return json_decode(
+            (string) $tempClient->post('vendor/auth', [
+                'json' => [
+                    'username' => $email,
+                    'password' => $password,
+                ]
+            ])->getBody(),
+            true
+        );
+    }
+
+    public function __call($method, $arguments)
+    {
+    	if(!method_exists($this, $method)) {
+    		return null; //todo: throw error
+    	}
+
+        $response = call_user_func_array(array($this, $method), $arguments);
+    	if($response->getStatusCode() !== 200)
+    	{
+    		throw new \Exception('API Error... JSON... ' . (string) $response->getBody());
+    	}
+
+    	return json_decode(
+    		(string) $response->getBody(),
+    		true
+    	);
     }
 }
