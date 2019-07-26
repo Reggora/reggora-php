@@ -99,6 +99,6 @@ class GuzzleAdapter {
     	return json_decode(
     		(string) $response->getBody(),
     		true
-    	);
+    	)['data'];
     }
 }
