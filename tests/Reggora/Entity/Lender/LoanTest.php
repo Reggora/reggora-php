@@ -17,27 +17,36 @@ use Reggora\Entity\Lender\Loan;
  */
 class LoanTest extends TestCase
 {
-    /**
-     * @var Loan $loan An instance of "Loan" to test.
-     */
-    private $loan;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->loan = new Loan();
-    }
 
     /**
      * @covers \Reggora\Entity\Lender\Loan::find
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $loan = Loan::create([
+            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'appraisal_type' =>  'refinance',
+            'subject_property_address' =>  '695 Atlantic St',
+            'subject_property_zip' =>  '02134',
+            'subject_property_city' =>  'Boston',
+            'subject_property_state' =>  'MA',
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'electronic_consent' =>  false
+        ]);
+
+        if($loan !== null && $loan->id !== null)
+        {
+            $loan = Loan::find($loan->id);
+            if($loan->id !== null)
+            {
+                $this->markTestComplete();
+            }
+        }
+        else
+        {
+            $this->markTestIncomplete();
+        }
     }
 
     /**
@@ -45,8 +54,26 @@ class LoanTest extends TestCase
      */
     public function testCreate(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $loan = Loan::create([
+            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'appraisal_type' =>  'refinance',
+            'subject_property_address' =>  '695 Atlantic St',
+            'subject_property_zip' =>  '02134',
+            'subject_property_city' =>  'Boston',
+            'subject_property_state' =>  'MA',
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'electronic_consent' =>  false
+        ]);
+
+        if($loan !== null && $loan->id !== null)
+        {
+            $this->markTestComplete();
+        }
+        else
+        {
+            $this->markTestIncomplete();
+        }
     }
 
     /**
@@ -54,8 +81,31 @@ class LoanTest extends TestCase
      */
     public function testDelete(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $loan = Loan::create([
+            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'appraisal_type' =>  'refinance',
+            'subject_property_address' =>  '695 Atlantic St',
+            'subject_property_zip' =>  '02134',
+            'subject_property_city' =>  'Boston',
+            'subject_property_state' =>  'MA',
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'electronic_consent' =>  false
+        ]);
+
+        if($loan !== null && $loan->id !== null)
+        {
+            $loan->delete();
+
+            if($deleted = Loan::find($loan->id) && $deleted === null)
+            {
+                $this->markTestComplete();
+            }
+        }
+        else
+        {
+            $this->markTestIncomplete();
+        }
     }
 
     /**
@@ -63,8 +113,32 @@ class LoanTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $loan = Loan::create([
+            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'appraisal_type' =>  'refinance',
+            'subject_property_address' =>  '695 Atlantic St',
+            'subject_property_zip' =>  '02134',
+            'subject_property_city' =>  'Boston',
+            'subject_property_state' =>  'MA',
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'electronic_consent' =>  false
+        ]);
+
+        if($loan !== null && $loan->id !== null)
+        {
+            $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T17:10:46+05:30'; //different date
+            $loan->save();
+
+            if($saved = Loan::find($loan->id) && $loan->due_date === $saved->due_date)
+            {
+                $this->markTestComplete();
+            }
+        }
+        else
+        {
+            $this->markTestIncomplete();
+        }
     }
 
     /**
@@ -72,7 +146,13 @@ class LoanTest extends TestCase
      */
     public function testAll(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        if(Loan::all() instanceof \Illuminate\Support\Collection)
+        {
+            $this->markTestComplete();
+        }
+        else
+        {
+            $this->markTestIncomplete();
+        }
     }
 }

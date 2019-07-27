@@ -1,7 +1,7 @@
 <?php
 namespace Reggora;
 
-class Reggora {
+final class Reggora {
 
-	const BASE_API_URI = 'https://sandbox.reggora.io/';
+	public const BASE_API_URI = 'https://sandbox.reggora.io/';
 }

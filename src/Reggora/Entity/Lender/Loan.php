@@ -6,11 +6,18 @@ use Reggora\Entity\AbstractEntity;
 
 use Illuminate\Support\Collection;
 
-class Loan extends AbstractEntity {
+final class Loan extends AbstractEntity {
 
 	public static function find(string $id)
 	{
-		return new Loan(Lender::getInstance()->getAdapter()->get(sprintf('lender/loan/%s', $id)));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/loan/%s', $id));
+
+		if(!empty($json) && isset($json['id']))
+		{
+			return new Loan($json);
+		}
+		
+		return null;
 	}
 
 	public static function create(array $parameters)
@@ -26,7 +33,7 @@ class Loan extends AbstractEntity {
 
 	public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/loan/%s', $id), $this->dirtyData);
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/loan/%s', $id), $this->getDirtyData());
 		$this->clean();
 	}
 
@@ -45,5 +52,10 @@ class Loan extends AbstractEntity {
 		}
 
 		return new Collection($loans);
+	}
+
+	public function getIdentifier()
+	{
+		return 'id';
 	}
 }
