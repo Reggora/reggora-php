@@ -17,6 +17,7 @@ class GuzzleAdapter {
 	{
 		$this->client = new Client([
 			'base_uri' => Reggora::BASE_API_URI,
+            'http_errors' => false,
 			'headers' => [
 				'Authorization' => sprintf('Bearer %s', $authToken),
 				'integration' => $integrationToken,
@@ -93,7 +94,7 @@ class GuzzleAdapter {
         $response = call_user_func_array(array($this, $method), $arguments);
     	if($response->getStatusCode() !== 200)
     	{
-    		throw new \Exception('API Error... JSON... ' . (string) $response->getBody());
+    		//todo: save error
     	}
 
     	return json_decode(

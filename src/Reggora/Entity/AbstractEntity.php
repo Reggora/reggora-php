@@ -46,8 +46,6 @@ abstract class AbstractEntity {
 		$this->dirtyData = [];
 	}
 
-	public abstract function getIdentifier();
-
 	public function isDirty(string $key = null)
 	{
 		if($key === null)
@@ -89,4 +87,6 @@ abstract class AbstractEntity {
 	{
 		return $key === null ? $this->originalData : $this->originalData[$key];
 	}
+
+	public abstract function getIdentifier();
 }

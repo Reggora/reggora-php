@@ -30,7 +30,7 @@ class LoanTest extends TestCase
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
-            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
             'officer' =>  '5b3bbfdb4348380ddc56cd12',
             'electronic_consent' =>  false
         ]);
@@ -38,9 +38,9 @@ class LoanTest extends TestCase
         if($loan !== null && $loan->id !== null)
         {
             $loan = Loan::find($loan->id);
-            if($loan->id !== null)
+            if($loan->id === null)
             {
-                $this->markTestComplete();
+                $this->markTestIncomplete();
             }
         }
         else
@@ -61,16 +61,12 @@ class LoanTest extends TestCase
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
-            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
             'officer' =>  '5b3bbfdb4348380ddc56cd12',
             'electronic_consent' =>  false
         ]);
 
-        if($loan !== null && $loan->id !== null)
-        {
-            $this->markTestComplete();
-        }
-        else
+        if($loan === null || $loan->id === null)
         {
             $this->markTestIncomplete();
         }
@@ -88,7 +84,7 @@ class LoanTest extends TestCase
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
-            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
             'officer' =>  '5b3bbfdb4348380ddc56cd12',
             'electronic_consent' =>  false
         ]);
@@ -97,9 +93,9 @@ class LoanTest extends TestCase
         {
             $loan->delete();
 
-            if($deleted = Loan::find($loan->id) && $deleted === null)
+            if($deleted = Loan::find($loan->id) && $deleted !== null)
             {
-                $this->markTestComplete();
+                $this->markTestIncomplete();
             }
         }
         else
@@ -120,19 +116,19 @@ class LoanTest extends TestCase
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
-            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T17:10:46+05:30', //dynamic date so test doesnt fail in the future
+            'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
             'officer' =>  '5b3bbfdb4348380ddc56cd12',
             'electronic_consent' =>  false
         ]);
 
         if($loan !== null && $loan->id !== null)
         {
-            $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T17:10:46+05:30'; //different date
+            $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T10:10:46Z'; //different date
             $loan->save();
 
-            if($saved = Loan::find($loan->id) && $loan->due_date === $saved->due_date)
+            if($saved = Loan::find($loan->id) && $loan->due_date !== $saved->due_date)
             {
-                $this->markTestComplete();
+                $this->markTestIncomplete();
             }
         }
         else
@@ -146,11 +142,7 @@ class LoanTest extends TestCase
      */
     public function testAll(): void
     {
-        if(Loan::all() instanceof \Illuminate\Support\Collection)
-        {
-            $this->markTestComplete();
-        }
-        else
+        if(!Loan::all() instanceof \Illuminate\Support\Collection)
         {
             $this->markTestIncomplete();
         }

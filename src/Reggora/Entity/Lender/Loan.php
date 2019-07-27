@@ -33,7 +33,7 @@ final class Loan extends AbstractEntity {
 
 	public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/loan/%s', $id), $this->getDirtyData());
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/loan/%s', $this->id), $this->getDirtyData());
 		$this->clean();
 	}
 
@@ -46,7 +46,7 @@ final class Loan extends AbstractEntity {
 			'loan_officer' => $loanOfficer,
 		]);
 
-		foreach($loans['loans'] as $key => $data)
+		foreach($loans as $key => $data)
 		{
 			$loans[$key] = new Loan($data);
 		}
