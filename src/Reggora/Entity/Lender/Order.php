@@ -8,9 +8,11 @@ use Illuminate\Support\Collection;
 
 final class Order extends AbstractEntity {
 
-	protected $accepted_vendor;
+	public $accepted_vendor;
 
-	protected $requested_vendors;
+	public $requested_vendors;
+
+	public $submissions;
 
 	public function __construct(array $data)
 	{
@@ -91,10 +93,27 @@ final class Order extends AbstractEntity {
 	{
 		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $id), $this->getDirtyData());
 		$this->clean();
+
+		$this->submissions = null; //reset
 	}
 
 	public function getIdentifier()
 	{
 		return 'id';
+	}
+
+	public function submissions(array $params = [])
+	{
+		if($this->submissions === null)
+		{
+			$entities = Lender::getInstance()->getAdapter()->get(sprintf('lender/order-submissions/%s', $id, $params);
+			$entities = is_array($entities) ? $entities : [];
+
+			return $this->submissions = new EntityRelationship(Lender::class, 'order-submission', $entities);
+		}
+		else
+		{
+			return $this->submissions;
+		}
 	}
 }
