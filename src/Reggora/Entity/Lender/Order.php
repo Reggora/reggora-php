@@ -46,9 +46,34 @@ final class Order extends AbstractEntity {
 		//todo: `loan_files` ?
 	}
 
+	public static function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null, $filters = [])
+	{
+		$orders = Lender::getInstance()->getAdapter()->get('lender/orders', [
+			'offset' => $offset,
+			'limit' => $limit,
+			'ordering' => $ordering,
+			'loan_officer' => $loanOfficer,
+			'filters' => implode(',', $filters),
+		]);
+
+		foreach($orders as $key => $data)
+		{
+			$orders[$key] = new Order($data);
+		}
+
+		return new Collection($orders);
+	}
+
 	public static function find(string $id)
 	{
-		return new Order(Lender::getInstance()->getAdapter()->get(sprintf('lender/order/%s', $id)));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/order/%s', $id));
+
+		if(!empty($json) && isset($json['id']))
+		{
+			return new Order($json);
+		}
+		
+		return null;
 	}
 
 	public static function create(array $parameters)
@@ -57,7 +82,7 @@ final class Order extends AbstractEntity {
 		return self::find($order);
 	}
 
-	public function delete()
+	public function cancel()
 	{
 		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/order/%s', $this->id));
 	}
