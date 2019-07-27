@@ -89,4 +89,20 @@ abstract class AbstractEntity {
 	}
 
 	public abstract function getIdentifier();
+
+	public function reset()
+	{
+        $blankInstance = new static;
+        $reflBlankInstance = new \ReflectionClass($blankInstance);
+        foreach ($reflBlankInstance->getProperties() as $prop) 
+        {
+        	if($prop->name === 'originalData') //dont reset originalData
+        	{
+        		continue;
+        	}
+
+            $prop->setAccessible(true);
+            $this->{$prop->name} = $prop->getValue($blankInstance);
+        }
+	}
 }
