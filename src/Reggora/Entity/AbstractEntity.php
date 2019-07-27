@@ -84,4 +84,9 @@ abstract class AbstractEntity {
 
 		return $return;
 	}
+
+	public function getOriginal(string $key = null)
+	{
+		return $key === null ? $this->originalData : $this->originalData[$key];
+	}
 }
