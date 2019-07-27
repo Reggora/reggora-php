@@ -3,9 +3,8 @@ namespace Reggora\Adapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Response;
 
+use Psr\Http\Message\ResponseInterface;
 use Reggora\Reggora;
 
 class GuzzleAdapter {
@@ -13,7 +12,12 @@ class GuzzleAdapter {
 	/**@var ClientInterface */
 	protected $client;
 
-	public function __construct(String $authToken, String $integrationToken)
+    /**
+     * GuzzleAdapter constructor.
+     * @param String $authToken
+     * @param String $integrationToken
+     */
+    public function __construct(String $authToken, String $integrationToken)
 	{
 		$this->client = new Client([
 			'base_uri' => Reggora::BASE_API_URI,
@@ -25,11 +29,21 @@ class GuzzleAdapter {
 		]);
 	}
 
+    /**
+     * @param String $url
+     * @param array $params
+     * @return ResponseInterface
+     */
     private function get(String $url, Array $params = [])
     {
         return $this->client->get($url, ['query' => $params]);
     }
 
+    /**
+     * @param String $url
+     * @param string $content
+     * @return ResponseInterface
+     */
     private function post(String $url, $content = '')
     {
         $options = [];
@@ -38,11 +52,21 @@ class GuzzleAdapter {
         return $this->client->post($url, $options);
     }
 
+    /**
+     * @param String $url
+     * @param array $params
+     * @return ResponseInterface
+     */
     private function delete(String $url, Array $params = [])
     {
         return $this->client->delete($url, ['query' => $params]);
     }
 
+    /**
+     * @param String $url
+     * @param string $content
+     * @return ResponseInterface
+     */
     private function put(String $url, $content = '')
     {
         $options = [];
@@ -51,6 +75,11 @@ class GuzzleAdapter {
         return $this->client->put($url, $options);
     }
 
+    /**
+     * @param String $email
+     * @param String $password
+     * @return mixed
+     */
     public static function authenticateLender(String $email, String $password)
     {
     	$tempClient = new Client([
@@ -68,6 +97,11 @@ class GuzzleAdapter {
         );
     }
 
+    /**
+     * @param String $email
+     * @param String $password
+     * @return mixed
+     */
     private static function authenticateVendor(String $email, String $password)
     {
     	$tempClient = new Client([
@@ -85,6 +119,11 @@ class GuzzleAdapter {
         );
     }
 
+    /**
+     * @param $method
+     * @param $arguments
+     * @return array|null
+     */
     public function __call($method, $arguments)
     {
     	if(!method_exists($this, $method)) {

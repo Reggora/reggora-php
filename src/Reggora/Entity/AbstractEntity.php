@@ -1,18 +1,30 @@
 <?php
 namespace Reggora\Entity;
 
+use ReflectionException;
+
 abstract class AbstractEntity {
 
+    /**@var array*/
 	private $originalData;
 
+	/**@var array*/
 	private $dirtyData = [];
 
-	public function __construct(array $data)
+    /**
+     * AbstractEntity constructor.
+     * @param array $data
+     */
+    public function __construct(array $data)
 	{
 		$this->originalData = $data;
 	}
 
-	public function __get($key)
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function __get(string $key)
 	{
 		if(isset($this->{$key}))
 		{
@@ -27,12 +39,20 @@ abstract class AbstractEntity {
 		return $this->originalData[$key];
 	}
 
-	public function __set($key, $value)
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function __set($key, $value)
 	{
 		$this->dirtyData[$key] = $value;
 	}
 
-	public static function createFromArray(array $entities)
+    /**
+     * @param array $entities
+     * @return AbstractEntity
+     */
+    public static function createFromArray(array $entities)
 	{
 		foreach($entities as $entity)
 		{
@@ -40,13 +60,22 @@ abstract class AbstractEntity {
 		}
 	}
 
-	public function clean()
+    /**
+     * Clean the entity
+     */
+    public function clean()
 	{
 		$this->originalData = array_merge($this->originalData, $this->dirtyData);
 		$this->dirtyData = [];
 	}
 
-	public function isDirty(string $key = null)
+    /**
+     * Check if the entity contains unsaved values
+     *
+     * @param string|null $key
+     * @return bool
+     */
+    public function isDirty(string $key = null)
 	{
 		if($key === null)
 		{
@@ -56,7 +85,12 @@ abstract class AbstractEntity {
 		return $this->originalData[$key] === $this->dirtyData[$key];
 	}
 
-	public function getDirtyData() : array
+    /**
+     * Get POST safe unsaved data
+     *
+     * @return array
+     */
+    public function getDirtyData() : array
 	{
 		$return = [];
 		foreach($this->dirtyData as $key => $value)
@@ -83,14 +117,30 @@ abstract class AbstractEntity {
 		return $return;
 	}
 
-	public function getOriginal(string $key = null)
+    /**
+     * Get the original value for a key or all of an entities original data
+     *
+     * @param string|null $key
+     * @return array|mixed
+     */
+    public function getOriginal(string $key = null)
 	{
 		return $key === null ? $this->originalData : $this->originalData[$key];
 	}
 
-	public abstract function getIdentifier();
+    /**
+     * Get the identifier for the model e.g `id`
+     *
+     * @return mixed
+     */
+    public abstract function getIdentifier();
 
-	public function reset()
+    /**
+     * Reset a model
+     *
+     * @throws ReflectionException
+     */
+    public function reset()
 	{
         $blankInstance = new static;
         $reflBlankInstance = new \ReflectionClass($blankInstance);

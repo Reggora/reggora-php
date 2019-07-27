@@ -6,15 +6,25 @@ use Reggora\Entity\AbstractEntity;
 
 use Illuminate\Support\Collection;
 
+/**
+ * @property mixed id
+ */
 final class Order extends AbstractEntity {
 
+    /**@var Vendor*/
 	public $accepted_vendor;
 
+	/**@var Collection*/
 	public $requested_vendors;
 
+	/**@var EntityRelationship*/
 	public $submissions;
 
-	public function __construct(array $data)
+    /**
+     * Order constructor.
+     * @param array $data
+     */
+    public function __construct(array $data)
 	{
 		parent::__construct($data);
 
@@ -48,7 +58,15 @@ final class Order extends AbstractEntity {
 		//todo: `loan_files` ?
 	}
 
-	public static function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null, $filters = [])
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @param string $ordering
+     * @param null $loanOfficer
+     * @param array $filters
+     * @return Collection
+     */
+    public static function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null, $filters = [])
 	{
 		$orders = Lender::getInstance()->getAdapter()->get('lender/orders', [
 			'offset' => $offset,
@@ -66,7 +84,11 @@ final class Order extends AbstractEntity {
 		return new Collection($orders);
 	}
 
-	public static function find(string $id)
+    /**
+     * @param string $id
+     * @return Order|null
+     */
+    public static function find(string $id)
 	{
 		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/order/%s', $id));
 
@@ -78,35 +100,52 @@ final class Order extends AbstractEntity {
 		return null;
 	}
 
-	public static function create(array $parameters)
+    /**
+     * @param array $parameters
+     * @return Order|null
+     */
+    public static function create(array $parameters)
 	{
 		$order = Lender::getInstance()->getAdapter()->post('lender/order/create', $parameters);
 		return self::find($order);
 	}
 
-	public function cancel()
+    /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function cancel()
 	{
 		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/order/%s', $this->id));
 	}
 
-	public function save()
+    /**
+     *
+     */
+    public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $id), $this->getDirtyData());
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $this->id), $this->getDirtyData());
 		$this->clean();
 
 		$this->submissions = null; //reset
 	}
 
-	public function getIdentifier()
+    /**
+     * @return mixed|string
+     */
+    public function getIdentifier()
 	{
 		return 'id';
 	}
 
-	public function submissions(array $params = [])
+    /**
+     * @param array $params
+     * @return EntityRelationship
+     */
+    public function submissions(array $params = [])
 	{
 		if($this->submissions === null)
 		{
-			$entities = Lender::getInstance()->getAdapter()->get(sprintf('lender/order-submissions/%s', $id, $params);
+			$entities = Lender::getInstance()->getAdapter()->get(sprintf('lender/order-submissions/%s', $this->id, $params));
 			$entities = is_array($entities) ? $entities : [];
 
 			return $this->submissions = new EntityRelationship(Lender::class, 'order-submission', $entities);

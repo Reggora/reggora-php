@@ -11,7 +11,13 @@ final class Lender {
 	/**@var Lender|null */
     public static $instance;
 
-	public function __construct(String $email, String $password, String $integrationToken)
+    /**
+     * Lender constructor.
+     * @param String $email
+     * @param String $password
+     * @param String $integrationToken
+     */
+    public function __construct(String $email, String $password, String $integrationToken)
 	{
 		$authenticationInformation = GuzzleAdapter::authenticateLender($email, $password);
 
@@ -20,11 +26,17 @@ final class Lender {
 		self::$instance = $this;
 	}
 
-	public function getAdapter()
+    /**
+     * @return GuzzleAdapter
+     */
+    public function getAdapter()
 	{
 		return $this->adapter;
 	}
 
+    /**
+     * @return Lender|null
+     */
     public static function getInstance() {
         return self::$instance;
     }

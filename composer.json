@@ -4,7 +4,9 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "phpunit/phpunit": "6.0",
-        "tightenco/collect": "^5.8"
+        "tightenco/collect": "^5.8",
+        "ext-json": "*",
+        "php": ">= 7.2"
     },
     "authors": [
         {

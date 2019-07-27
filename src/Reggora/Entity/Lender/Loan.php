@@ -1,14 +1,24 @@
 <?php
 namespace Reggora\Entity\Lender;
 
+use Psr\Http\Message\ResponseInterface;
 use Reggora\Lender;
 use Reggora\Entity\AbstractEntity;
 
 use Illuminate\Support\Collection;
 
+/**
+ * @property mixed id
+ */
 final class Loan extends AbstractEntity {
 
-	public static function find(string $id)
+    /**
+     * Find a loan by it's string id
+     *
+     * @param string $id
+     * @return Loan|null
+     */
+    public static function find(string $id)
 	{
 		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/loan/%s', $id));
 
@@ -20,24 +30,47 @@ final class Loan extends AbstractEntity {
 		return null;
 	}
 
-	public static function create(array $parameters)
+    /**
+     * Create a loan
+     *
+     * @param array $parameters
+     * @return Loan|null
+     */
+    public static function create(array $parameters)
 	{
 		$loan = Lender::getInstance()->getAdapter()->post('lender/loan/create', $parameters);
 		return self::find($loan);
 	}
 
-	public function delete()
+    /**
+     * Delete a loan
+     *
+     * @return ResponseInterface
+     */
+    public function delete()
 	{
 		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/loan/%s', $this->id));
 	}
 
-	public function save()
+    /**
+     * Save a loan
+     */
+    public function save()
 	{
 		Lender::getInstance()->getAdapter()->put(sprintf('lender/loan/%s', $this->id), $this->getDirtyData());
 		$this->clean();
 	}
 
-	public function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null)
+    /**
+     * Get all loans
+     *
+     * @param int $offset
+     * @param int $limit
+     * @param string $ordering
+     * @param null $loanOfficer
+     * @return Collection
+     */
+    public function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null)
 	{
 		$loans = Lender::getInstance()->getAdapter()->get('lender/loans', [
 			'offset' => $offset,
@@ -54,7 +87,12 @@ final class Loan extends AbstractEntity {
 		return new Collection($loans);
 	}
 
-	public function getIdentifier()
+    /**
+     * Get the entity identifier
+     *
+     * @return mixed|string
+     */
+    public function getIdentifier()
 	{
 		return 'id';
 	}

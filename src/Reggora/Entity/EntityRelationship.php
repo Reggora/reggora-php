@@ -5,21 +5,35 @@ use Illuminate\Support\Collection;
 
 final class EntityRelationship {
 
-	protected $adapterParentClass;
+    /**@var string*/
+	protected $adapterParentClass; //currently unused
 
-	protected $routeSlug;
+	/**@var string*/
+	protected $routeSlug; //currently unused
 
+	/**@var array*/
 	protected $entities;
 
-	public function __construct(String $adapterParentClass, String $routeSlug, Array $entities)
+    /**
+     * EntityRelationship constructor.
+     * @param String $adapterParentClass
+     * @param String $routeSlug
+     * @param array $entities
+     */
+    public function __construct(String $adapterParentClass, String $routeSlug, Array $entities)
 	{
 		$this->adapterParentClass = $adapterParentClass;
 		$this->routeSlug = $routeSlug;
 		$this->entities = $entities;
 	}
 
-	public function collection()
+    /**
+     * Get a collection of the entities
+     *
+     * @return Collection
+     */
+    public function collection()
 	{
-		return new Collection($entities);
+		return new Collection($this->entities);
 	}
 }
