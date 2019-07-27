@@ -21,7 +21,14 @@ final class Product extends AbstractEntity {
 
 	public static function find(string $id)
 	{
-		return new Product(Lender::getInstance()->getAdapter()->get(sprintf('lender/product/%s', $id)));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/product/%s', $id));
+		
+		if(!empty($json) && isset($json['id']))
+		{
+			return new Product($json);
+		}
+		
+		return null;
 	}
 
 	public static function create(array $parameters)
