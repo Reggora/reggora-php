@@ -64,7 +64,7 @@ final class Order extends AbstractEntity {
 
 	public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $id), $this->dirtyData);
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $id), $this->getDirtyData());
 		$this->clean();
 	}
 

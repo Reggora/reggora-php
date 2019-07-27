@@ -3,9 +3,9 @@ namespace Reggora\Entity;
 
 abstract class AbstractEntity {
 
-	protected $originalData;
+	private $originalData;
 
-	protected $dirtyData = [];
+	private $dirtyData = [];
 
 	public function __construct(array $data)
 	{

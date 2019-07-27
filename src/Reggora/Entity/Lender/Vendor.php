@@ -37,7 +37,7 @@ final class Vendor extends AbstractEntity {
 
 	public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/vendor/%s', $id), $this->dirtyData);
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/vendor/%s', $id), $this->getDirtyData());
 		$this->clean();
 	}
 
