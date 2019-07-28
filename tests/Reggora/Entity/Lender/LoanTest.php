@@ -35,18 +35,9 @@ class LoanTest extends TestCase
             'electronic_consent' =>  false
         ]);
 
-        if($loan !== null && $loan->id !== null)
-        {
-            $loan = Loan::find($loan->id);
-            if($loan->id === null)
-            {
-                $this->markTestIncomplete();
-            }
-        }
-        else
-        {
-            $this->markTestIncomplete();
-        }
+        $this->assertNotNull($loan);
+        $this->assertNotNull($loan->id);
+        $this->assertNotNull(Loan::find($loan->id));
     }
 
     /**
@@ -66,10 +57,8 @@ class LoanTest extends TestCase
             'electronic_consent' =>  false
         ]);
 
-        if($loan === null || $loan->id === null)
-        {
-            $this->markTestIncomplete();
-        }
+        $this->assertNotNull($loan);
+        $this->assertNotNull($loan->id);
     }
 
     /**
@@ -89,19 +78,10 @@ class LoanTest extends TestCase
             'electronic_consent' =>  false
         ]);
 
-        if($loan !== null && $loan->id !== null)
-        {
-            $loan->delete();
+        $this->assertNotNull($loan);
+        $loan->delete();
 
-            if($deleted = Loan::find($loan->id) && $deleted !== null)
-            {
-                $this->markTestIncomplete();
-            }
-        }
-        else
-        {
-            $this->markTestIncomplete();
-        }
+        $this->assertNull(Loan::find($loan->id));
     }
 
     /**
@@ -121,20 +101,14 @@ class LoanTest extends TestCase
             'electronic_consent' =>  false
         ]);
 
-        if($loan !== null && $loan->id !== null)
-        {
-            $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T10:10:46Z'; //different date
-            $loan->save();
+        $this->assertNotNull($loan);
 
-            if($saved = Loan::find($loan->id) && $loan->due_date !== $saved->due_date)
-            {
-                $this->markTestIncomplete();
-            }
-        }
-        else
-        {
-            $this->markTestIncomplete();
-        }
+        $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T10:10:46Z'; //different date
+        $loan->save();
+
+        $saved = Loan::find($loan->id);
+        $this->assertNotNull($saved);
+        $this->assertNotEquals($loan->due_date, $saved->due_date);
     }
 
     /**
@@ -142,9 +116,6 @@ class LoanTest extends TestCase
      */
     public function testAll(): void
     {
-        if(!Loan::all() instanceof \Illuminate\Support\Collection)
-        {
-            $this->markTestIncomplete();
-        }
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, Loan::all());
     }
 }
