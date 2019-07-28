@@ -31,9 +31,37 @@ final class Vendor extends AbstractEntity {
 		return null;
 	}
 
-	public static function create(array $parameters)
+	public static function findByBranch(string $branch_id = null)
 	{
-		$vendor = Lender::getInstance()->getAdapter()->post('lender/vendor/create', $parameters);
+		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor/branch', [
+			'branch_id' => $branch_id,
+		]);
+		
+		foreach($vendors['vendors'] as $key => $data)
+		{
+			$vendors[$key] = new Vendor($data);
+		}
+
+		return new Collection($vendors);
+	}
+
+	public static function findByZone(array $zones = [])
+	{
+		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor/by_zone', [
+			'zones' => $zones,
+		]);
+		
+		foreach($vendors['vendors'] as $key => $data)
+		{
+			$vendors[$key] = new Vendor($data);
+		}
+
+		return new Collection($vendors);
+	}
+
+	public static function invite(array $parameters)
+	{
+		$vendor = Lender::getInstance()->getAdapter()->post('lender/vendor', $parameters);
 		return self::find($vendor);
 	}
 
