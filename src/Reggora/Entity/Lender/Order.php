@@ -49,13 +49,7 @@ final class Order extends AbstractEntity {
 
 		if(isset($data['products']) && is_array($data['products']))
 		{
-			$products = [];
-			foreach($data['products'] as $product)
-			{
-				$products[] = new Product($product);
-			}
-
-			$this->products = new EntityRelationship(Lender::class, 'product', $products);
+			$this->products = new EntityRelationship(Lender::class, 'product', $data['products']);
 		}
 
 		//todo: `loan_files` ?
@@ -122,11 +116,13 @@ final class Order extends AbstractEntity {
 	}
 
     /**
-     *
+     * Save an order
      */
     public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $this->id), $this->getDirtyData());
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s', $this->id), $this->getDirtyData([
+			'products' => $this->products->collection()->pluck('id')->toArray(),
+		]));
 		$this->clean();
 
 		$this->submissions = null; //reset

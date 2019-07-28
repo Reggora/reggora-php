@@ -90,7 +90,7 @@ abstract class AbstractEntity {
      *
      * @return array
      */
-    public function getDirtyData() : array
+    public function getDirtyData(array $replace = []) : array
 	{
 		$return = [];
 		foreach($this->dirtyData as $key => $value)
@@ -114,7 +114,7 @@ abstract class AbstractEntity {
 			}
 		}
 
-		return $return;
+		return array_replace($return, $replace);
 	}
 
     /**
