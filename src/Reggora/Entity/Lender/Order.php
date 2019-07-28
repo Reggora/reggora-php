@@ -20,6 +20,9 @@ final class Order extends AbstractEntity {
 	/**@var EntityRelationship*/
 	public $submissions;
 
+	/**@var EntityRelationship*/
+	public $products;
+
     /**
      * Order constructor.
      * @param array $data
@@ -52,7 +55,7 @@ final class Order extends AbstractEntity {
 				$products[] = new Product($product);
 			}
 
-			$this->products = new Collection($products);
+			$this->products = new EntityRelationship(Lender::class, 'product', $products);
 		}
 
 		//todo: `loan_files` ?
@@ -154,5 +157,14 @@ final class Order extends AbstractEntity {
 		{
 			return $this->submissions;
 		}
+	}
+
+    /**
+     * @param array $params
+     * @return EntityRelationship
+     */
+    public function products(array $params = [])
+	{
+		return $this->products;
 	}
 }
