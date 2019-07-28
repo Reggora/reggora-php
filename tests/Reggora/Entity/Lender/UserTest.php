@@ -4,21 +4,21 @@ namespace Test\Reggora\Entity\Lender;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Reggora\Entity\Lender\Order;
+use Reggora\Entity\Lender\User;
 
 /**
- * Class OrderTest.
+ * Class UserTest.
  *
  * @author Lynn Digital LLC <sales@lynndigital.com)
  * @copyright 2019 Reggora, Inc
  * @license https://opensource.org/licenses/MIT The MIT license.
  *
- * @covers \Reggora\Entity\Lender\Order
+ * @covers \Reggora\Entity\Lender\User
  */
-class OrderTest extends TestCase
+class UserTest extends TestCase
 {
     /**
-     * @covers \Reggora\Entity\Lender\Order::__construct
+     * @covers \Reggora\Entity\Lender\User::__construct
      */
     public function testConstruct(): void
     {
@@ -27,16 +27,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::all
-     */
-    public function testAll(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::find
+     * @covers \Reggora\Entity\Lender\User::find
      */
     public function testFind(): void
     {
@@ -45,25 +36,25 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::create
+     * @covers \Reggora\Entity\Lender\User::invite
      */
-    public function testCreate(): void
+    public function testInvite(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::cancel
+     * @covers \Reggora\Entity\Lender\User::delete
      */
-    public function testCancel(): void
+    public function testDelete(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::save
+     * @covers \Reggora\Entity\Lender\User::save
      */
     public function testSave(): void
     {
@@ -72,27 +63,18 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::getIdentifier
+     * @covers \Reggora\Entity\Lender\User::all
+     */
+    public function testAll(): void
+    {
+        /** @todo Complete this unit test method. */
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @covers \Reggora\Entity\Lender\User::getIdentifier
      */
     public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::submissions
-     */
-    public function testSubmissions(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::products
-     */
-    public function testProducts(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();

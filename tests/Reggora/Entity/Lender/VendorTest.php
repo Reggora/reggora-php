@@ -18,20 +18,6 @@ use Reggora\Entity\Lender\Vendor;
 class VendorTest extends TestCase
 {
     /**
-     * @var Vendor $vendor An instance of "Vendor" to test.
-     */
-    private $vendor;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->vendor = new Vendor();
-    }
-
-    /**
      * @covers \Reggora\Entity\Lender\Vendor::all
      */
     public function testAll(): void
@@ -50,9 +36,27 @@ class VendorTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Vendor::create
+     * @covers \Reggora\Entity\Lender\Vendor::findByBranch
      */
-    public function testCreate(): void
+    public function testFindByBranch(): void
+    {
+        /** @todo Complete this unit test method. */
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @covers \Reggora\Entity\Lender\Vendor::findByZone
+     */
+    public function testFindByZone(): void
+    {
+        /** @todo Complete this unit test method. */
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @covers \Reggora\Entity\Lender\Vendor::invite
+     */
+    public function testInvite(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();

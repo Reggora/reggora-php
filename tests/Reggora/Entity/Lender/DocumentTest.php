@@ -4,21 +4,21 @@ namespace Test\Reggora\Entity\Lender;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Reggora\Entity\Lender\Order;
+use Reggora\Entity\Lender\Document;
 
 /**
- * Class OrderTest.
+ * Class DocumentTest.
  *
  * @author Lynn Digital LLC <sales@lynndigital.com)
  * @copyright 2019 Reggora, Inc
  * @license https://opensource.org/licenses/MIT The MIT license.
  *
- * @covers \Reggora\Entity\Lender\Order
+ * @covers \Reggora\Entity\Lender\Document
  */
-class OrderTest extends TestCase
+class DocumentTest extends TestCase
 {
     /**
-     * @covers \Reggora\Entity\Lender\Order::__construct
+     * @covers \Reggora\Entity\Lender\Document::__construct
      */
     public function testConstruct(): void
     {
@@ -27,7 +27,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::all
+     * @covers \Reggora\Entity\Lender\Document::all
      */
     public function testAll(): void
     {
@@ -36,7 +36,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::find
+     * @covers \Reggora\Entity\Lender\Document::find
      */
     public function testFind(): void
     {
@@ -45,54 +45,27 @@ class OrderTest extends TestCase
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::create
+     * @covers \Reggora\Entity\Lender\Document::upload
      */
-    public function testCreate(): void
+    public function testUpload(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::cancel
+     * @covers \Reggora\Entity\Lender\Document::delete
      */
-    public function testCancel(): void
+    public function testDelete(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
     }
 
     /**
-     * @covers \Reggora\Entity\Lender\Order::save
-     */
-    public function testSave(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::getIdentifier
+     * @covers \Reggora\Entity\Lender\Document::getIdentifier
      */
     public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::submissions
-     */
-    public function testSubmissions(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::products
-     */
-    public function testProducts(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
