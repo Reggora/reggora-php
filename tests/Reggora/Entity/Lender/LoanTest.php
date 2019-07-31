@@ -103,7 +103,7 @@ class LoanTest extends TestCase
 
         $this->assertNotNull($loan);
 
-        $loan->due_date = date('Y-m-d', strtotime('+31 days')) . 'T10:10:46Z'; //different date
+        $loan->due_date = date('Y-m-d', strtotime('+60 days')) . 'T10:10:46Z'; //different date
         $loan->save();
 
         $saved = Loan::find($loan->id);

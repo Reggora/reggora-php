@@ -3,23 +3,23 @@ namespace Reggora;
 
 use Reggora\Adapter\GuzzleAdapter;
 
-final class Vendor {
+final class Lender {
 
 	/**@var GuzzleAdapter */
 	protected $adapter;
 
-	/**@var Vendor|null */
+	/**@var Lender|null */
     public static $instance;
 
     /**
-     * Vendor constructor.
+     * Lender constructor.
      * @param String $email
      * @param String $password
      * @param String $integrationToken
      */
     public function __construct(String $email, String $password, String $integrationToken)
 	{
-		$authenticationInformation = GuzzleAdapter::authenticateVendor($email, $password);
+		$authenticationInformation = GuzzleAdapter::authenticateLender($email, $password);
 
 		$this->adapter = new GuzzleAdapter($authenticationInformation['token'], $integrationToken);
 
@@ -35,7 +35,7 @@ final class Vendor {
 	}
 
     /**
-     * @return Vendor|null
+     * @return Lender|null
      */
     public static function getInstance() {
         return self::$instance;

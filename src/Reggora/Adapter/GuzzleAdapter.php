@@ -136,7 +136,7 @@ class GuzzleAdapter {
     		//todo: save error
     	}
 
-    	return json_decode(
+    	return @json_decode(
     		(string) $response->getBody(),
     		true
     	)['data'];
