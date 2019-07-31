@@ -8,6 +8,21 @@ use Illuminate\Support\Collection;
 
 final class Order extends AbstractEntity {
 
+	public $submissionsRelationship;
+
+	public function __construct(array $data)
+	{
+		parent::__construct($data);
+
+		$submissions = [];
+		foreach($data['submissions'] as $submission)
+		{
+			$submissions[] = new Submission($submission);
+		}
+
+		$this->submissionsRelationship = new Collection($submissions);
+	}
+
 	public static function find(string $id)
 	{
 		$json = Vendor::getInstance()->getAdapter()->get(sprintf('vendor/order/%s', $id));
@@ -70,6 +85,16 @@ final class Order extends AbstractEntity {
 	{
 		$order = Vendor::getInstance()->getAdapter()->delete(sprintf('vendor/order/%s/complete_inspection', $id), $params);
 		return self::find($order);
+	}
+
+	public function submissions()
+	{
+		return $this->submissionsRelationship;
+	}
+
+	public function uploadSubmission(array $params)
+	{
+		return Vendor::getInstance()->getAdapter()->put(sprintf('vendor/order/%s/set_inspection', $id), $params);
 	}
 
 	public function getIdentifier()
