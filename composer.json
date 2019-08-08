@@ -3,7 +3,6 @@
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phpunit/phpunit": "6.0",
         "tightenco/collect": "^5.8",
         "ext-json": "*",
         "php": ">= 7.2"
@@ -22,6 +21,7 @@
     "require-dev": {
         "paulthebaud/phpunit-generator": "2.0",
         "symfony/yaml": "^4.3",
-        "nunomaduro/phpinsights": "^1.7"
+        "nunomaduro/phpinsights": "^1.7",
+        "phpunit/phpunit": "6.0"
     }
 }
