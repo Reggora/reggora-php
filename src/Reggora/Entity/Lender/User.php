@@ -61,9 +61,20 @@ final class User extends AbstractEntity {
      * @return string|null
      */
     public static function invite(array $parameters)
-	{
-		return Lender::getInstance()->getAdapter()->post('lender/users', $parameters);
-	}
+    {
+        return Lender::getInstance()->getAdapter()->post('lender/users/invite', $parameters);
+    }
+
+    /**
+     * Create a user
+     *
+     * @param array $parameters
+     * @return string|null
+     */
+    public static function create(array $parameters)
+    {
+        return Lender::getInstance()->getAdapter()->post('lender/users', $parameters);
+    }
 
     /**
      * Delete a user
