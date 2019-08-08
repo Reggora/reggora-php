@@ -159,6 +159,18 @@ final class Order extends AbstractEntity {
 		}
 	}
 
+	public function hold(string $reason)
+	{
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s/hold', $this->id), [
+			'reason' => $reason,
+		]);
+	}
+
+	public function unhold()
+	{
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/order/%s/unhold', $this->id));
+	}
+
     /**
      * @param array $params
      * @return EntityRelationship

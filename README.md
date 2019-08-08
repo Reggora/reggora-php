@@ -39,7 +39,9 @@ $productionMode = false;
 $lender = new Lender($username, $password, $integrationToken, $productionMode);
 ```
 
-### Get all loans
+### Loans
+
+#### Get all loans
 
 Any of the query parameters found on (INSERT LINK HERE)[https://sandbox.reggora.io/#get-all-loans] can be passed to the `Loan::all()` method.
 
@@ -51,17 +53,18 @@ use Reggora\Entity\Lender\Loan;
 $loans = Loan::all(); //returns a Collection
 ```
 
-### Get a loan by it's ID
+#### Get a loan by it's ID
 
 ```php
 ...
+
 use Reggora\Entity\Lender\Loan;
 
 $id = '...';
 $loan = Loan::find($id);
 ```
 
-### Delete a loan
+#### Delete a loan
 
 ```php
 ...
@@ -70,10 +73,11 @@ $loan = Loan::find($id);
 $loan->delete();
 ```
 
-### Create a loan
+#### Create a loan
 
 ```php
 ...
+
 use Reggora\Entity\Lender\Loan;
 
 $loan = Loan::create([
@@ -81,7 +85,7 @@ $loan = Loan::create([
 ]);
 ```
 
-### Edit a loan
+#### Edit a loan
 
 Because of our Entity style approach you can set any of a Loans elements as a property and use the `Loan::save()` method to only upadate the "dirty" data.
 
@@ -92,3 +96,73 @@ $loan->due_date = '08-08-19T10:10:46Z';
 $loan->save();
 ```
 
+### Orders
+
+#### Get all orders
+
+Any of the query parameters found on (INSERT LINK HERE)[https://sandbox.reggora.io/#get-all-orders] can be passed to the `Order::all()` method.
+
+```php
+...
+
+use Reggora\Entity\Lender\Order;
+
+$orders = Orders::all(); //returns a Collection
+```
+
+#### Get an order by ID
+
+```php
+...
+
+use Reggora\Entity\Lender\Order;
+
+$id = '...';
+$order = Order::find($id);
+```
+
+#### Cancel an order
+
+```php
+...
+
+$order->cancel();
+```
+
+#### Create an order
+
+```php
+...
+
+use Reggora\Entity\Lender\Order;
+
+$order = Order::create([
+	... //body found in the documentation
+]);
+```
+
+Because of our Entity style approach you can set any of an Orders elements as a property and use the `Order::save()` method to only upadate the "dirty" data.
+
+```php
+...
+
+$order->due_date = '08-08-19T10:10:46Z';
+$order->save();
+```
+
+#### Place an order on hold
+
+```php
+...
+
+$reason = '...';
+$order->hold($reason);
+```
+
+#### Remove an order hold
+
+```php
+...
+
+$order->unhold();
+```
