@@ -116,6 +116,9 @@ class LoanTest extends TestCase
      */
     public function testAll(): void
     {
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, Loan::all());
+        $all = Loan::all();
+
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $all);
+        $this->assertNotEmpty($all->toArray());
     }
 }
