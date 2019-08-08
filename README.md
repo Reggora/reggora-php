@@ -166,3 +166,54 @@ $order->hold($reason);
 
 $order->unhold();
 ```
+
+### eVault
+
+#### Get an eVault by ID
+
+```php
+...
+
+use Reggora\Entity\Lender\eVault;
+
+$id = '...';
+$evault = eVault::find($id);
+```
+
+#### Get a document from an eVault
+
+```php
+...
+
+$id = '...';
+$file = $evault->getDocument($id);
+```
+
+#### Upload a document to an eVault
+
+```php
+...
+
+$evault->uploadDocument([
+	... //body found in the documentation
+]);
+```
+
+#### Upload a P&S to an eVault
+
+```php
+...
+
+$evault->uploadPS([
+	... //body found in the documentation
+]);
+```
+
+#### Delete a document from an eVault
+
+```php
+...
+
+$id = '...';
+$evault->deleteDocument($id);
+```
