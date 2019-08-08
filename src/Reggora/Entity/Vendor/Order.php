@@ -19,7 +19,7 @@ final class Order extends AbstractEntity {
 	{
 		parent::__construct($data);
 
-		$submissions = [];
+		$submissions = Vendor::getInstance()->getAdapter()->get(sprintf('vendor/order/%s/submissions', $this->id));
 		foreach($submissions['submissions'] as $submission)
 		{
 			$submissions[] = new Submission($submission);
