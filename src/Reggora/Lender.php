@@ -16,12 +16,13 @@ final class Vendor {
      * @param String $email
      * @param String $password
      * @param String $integrationToken
+     * @param boolean $sandbox
      */
-    public function __construct(String $email, String $password, String $integrationToken)
+    public function __construct(String $email, String $password, String $integrationToken, boolean $sandbox = true)
 	{
-		$authenticationInformation = GuzzleAdapter::authenticateVendor($email, $password);
+		$authenticationInformation = GuzzleAdapter::authenticateVendor($email, $password, $sandbox);
 
-		$this->adapter = new GuzzleAdapter($authenticationInformation['token'], $integrationToken);
+		$this->adapter = new GuzzleAdapter($authenticationInformation['token'], $integrationToken, $sandbox);
 
 		self::$instance = $this;
 	}
