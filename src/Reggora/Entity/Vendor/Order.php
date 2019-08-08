@@ -20,7 +20,7 @@ final class Order extends AbstractEntity {
 		parent::__construct($data);
 
 		$submissions = [];
-		foreach($data['submissions'] as $submission)
+		foreach($submissions['submissions'] as $submission)
 		{
 			$submissions[] = new Submission($submission);
 		}
@@ -99,7 +99,7 @@ final class Order extends AbstractEntity {
 
 	public function uploadSubmission(array $params)
 	{
-		return Vendor::getInstance()->getAdapter()->put(sprintf('vendor/order/%s/set_inspection', $id), $params);
+		return Vendor::getInstance()->getAdapter()->put(sprintf('vendor/order/%s/submission', $id), $params);
 	}
 
 	public function getIdentifier()
