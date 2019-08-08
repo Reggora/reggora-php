@@ -33,7 +33,7 @@ final class Product extends AbstractEntity {
 
 	public static function create(array $parameters)
 	{
-		$product = Lender::getInstance()->getAdapter()->post('lender/product/create', $parameters);
+		$product = Lender::getInstance()->getAdapter()->post('lender/product', $parameters);
 		return self::find($product);
 	}
 
