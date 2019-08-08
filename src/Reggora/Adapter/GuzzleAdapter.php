@@ -21,7 +21,7 @@ class GuzzleAdapter {
     public function __construct(String $authToken, String $integrationToken, bool $sandbox)
 	{
 		$this->client = new Client([
-			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,
+			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URI : Reggora::BASE_PRODUCTION_API_URI,
             'http_errors' => false,
 			'headers' => [
 				'Authorization' => sprintf('Bearer %s', $authToken),
@@ -85,7 +85,7 @@ class GuzzleAdapter {
     public static function authenticateLender(String $email, String $password, bool $sandbox)
     {
     	$tempClient = new Client([
-			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,
+			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URI : Reggora::BASE_PRODUCTION_API_URI,
 		]);
 
         return json_decode(
@@ -108,7 +108,7 @@ class GuzzleAdapter {
     private static function authenticateVendor(String $email, String $password, bool $sandbox)
     {
     	$tempClient = new Client([
-			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,
+			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URI : Reggora::BASE_PRODUCTION_API_URI,
 		]);
 
 		return json_decode(
