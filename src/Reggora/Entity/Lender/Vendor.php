@@ -15,7 +15,7 @@ final class Vendor extends AbstractEntity {
 
 	public function all()
 	{
-		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor');
+		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendors');
 		foreach($vendors['vendors'] as $key => $data)
 		{
 			$vendors[$key] = new Vendor($data);
@@ -38,7 +38,7 @@ final class Vendor extends AbstractEntity {
 
 	public static function findByBranch(string $branch_id = null)
 	{
-		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor/branch', [
+		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendors/branch', [
 			'branch_id' => $branch_id,
 		]);
 		
@@ -52,7 +52,7 @@ final class Vendor extends AbstractEntity {
 
 	public static function findByZone(array $zones = [])
 	{
-		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor/by_zone', [
+		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendors/by_zone', [
 			'zones' => $zones,
 		]);
 		
