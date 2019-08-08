@@ -16,8 +16,8 @@ final class User extends AbstractEntity {
     public $matched_users;
 
     /**@var array*/
-    private $expectedData = [
-        'id', 'email', 'phone_number', 'first_name', 'last_name', 'created', 'role',
+    protected $expectedData = [
+        'id', 'email', 'phone_number', 'firstname', 'lastname', 'created', 'role',
     ];
 
     public function __construct(array $data)
@@ -44,7 +44,7 @@ final class User extends AbstractEntity {
      */
     public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/users/%s', $id))['user'];
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/users/%s', $id));
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -73,7 +73,9 @@ final class User extends AbstractEntity {
      */
     public static function create(array $parameters)
     {
-        return Lender::getInstance()->getAdapter()->post('lender/users', $parameters);
+        $id = Lender::getInstance()->getAdapter()->post('lender/users', $parameters);
+
+        return self::find($id);
     }
 
     /**

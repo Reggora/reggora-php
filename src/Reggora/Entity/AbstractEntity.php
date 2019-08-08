@@ -21,8 +21,13 @@ abstract class AbstractEntity {
 
         $originalKeys = array_keys($this->originalData);
         $expectedKeys = array_values($this->expectedData);
+        $intersected = array_intersect($expectedKeys, $originalKeys);
 
-        if($originalKeys !== $expectedKeys) 
+        sort($originalKeys);
+        sort($expectedKeys);
+        sort($intersected);
+
+        if(array_intersect($originalKeys, $expectedKeys) === $expectedKeys) 
         {
             throw new \Exception('Missing expected keys ' . implode(', ', array_diff($originalKeys, $expectedKeys)));
         }

@@ -23,8 +23,8 @@ final class UserTest extends TestCase
     public function testFind(): void
     {
         $user = User::create([
-            'email' => 'jake@lynndigital.com',
-            'role' => 'admin',
+            'email' => uniqid() . 'jake@lynndigital.com',
+            'role' => 'Admin',
             'firstname' => 'Jake',
             'lastname' => 'Casto',
             'phone_number' => '+13367126489',
@@ -42,8 +42,8 @@ final class UserTest extends TestCase
     public function testInvite(): void
     {
         $user = User::invite([
-            'email' => 'jake@lynndigital.com',
-            'role' => 'admin',
+            'email' => uniqid() . 'jake@lynndigital.com',
+            'role' => 'Admin',
             'firstname' => 'Jake',
             'lastname' => 'Casto',
             'phone_number' => '+13367126489',
@@ -58,8 +58,8 @@ final class UserTest extends TestCase
     public function testDelete(): void
     {
         $user = User::create([
-            'email' => 'jake@lynndigital.com',
-            'role' => 'admin',
+            'email' => uniqid() . 'jake@lynndigital.com',
+            'role' => 'Admin',
             'firstname' => 'Jake',
             'lastname' => 'Casto',
             'phone_number' => '+13367126489',
@@ -76,8 +76,8 @@ final class UserTest extends TestCase
     public function testSave(): void
     {
         $user = User::create([
-            'email' => 'jake@lynndigital.com',
-            'role' => 'admin',
+            'email' => uniqid() . 'jake@lynndigital.com',
+            'role' => 'Admin',
             'firstname' => 'Jake',
             'lastname' => 'Casto',
             'phone_number' => '+13367126489',
@@ -91,7 +91,7 @@ final class UserTest extends TestCase
         $savedUser = User::find($user->id);
 
         $this->assertNotNull($savedUser);
-        $this->assertNotEquals($savedUser->phone_number, $user->phone_number);
+        $this->assertEquals($savedUser->phone_number, $user->phone_number);
     }
 
     /**

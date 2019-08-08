@@ -24,7 +24,7 @@ final class Order extends AbstractEntity {
 	public $products;
 
 	/**@var array*/
-	private $expectedData = [
+	protected $expectedData = [
 		'id', 'status', 'priority', 'due_date', 'inspection_date', 'accepted_vendor', 'created', 'allocation_mode', 'requested_vendors', 'inspection_complete', 'products', 'loan_file',
 	];
 
