@@ -9,19 +9,21 @@ use Illuminate\Support\Collection;
 final class Product extends AbstractEntity {
 
 	/**@var array*/
-	private $expectedData = [
+	protected $expectedData = [
 		'id', 'product_name', 'amount', 'inspection_type', 'requested_forms', 'geographic_pricing',
 	];
 
 	public function all()
 	{
 		$products = Lender::getInstance()->getAdapter()->get('lender/products');
+
+		$collection = [];
 		foreach($products['products'] as $key => $data)
 		{
-			$products[$key] = new Product($data);
+			$collection[] = new Product($data);
 		}
 
-		return new Collection($products);
+		return new Collection($collection);
 	}
 
 	public static function find(string $id)

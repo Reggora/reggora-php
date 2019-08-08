@@ -26,9 +26,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan_id' => Loan::all()->first()->id,
+            'loan' => Loan::all()->first()->id,
             'priority' => 'Rush',
-            'products' => Product::all()->pluck('id'),
+            'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -44,7 +44,7 @@ final class OrderTest extends TestCase
             'allocation_type' => 'automatically',
             'loan_id' => Loan::all()->first()->id,
             'priority' => 'Rush',
-            'products' => Product::all()->pluck('id'),
+            'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -64,7 +64,7 @@ final class OrderTest extends TestCase
             'allocation_type' => 'automatically',
             'loan_id' => Loan::all()->first()->id,
             'priority' => 'Rush',
-            'products' => Product::all()->pluck('id'),
+            'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -83,7 +83,7 @@ final class OrderTest extends TestCase
             'allocation_type' => 'automatically',
             'loan_id' => Loan::all()->first()->id,
             'priority' => 'Rush',
-            'products' => Product::all()->pluck('id'),
+            'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -107,7 +107,7 @@ final class OrderTest extends TestCase
             'allocation_type' => 'automatically',
             'loan_id' => Loan::all()->first()->id,
             'priority' => 'Rush',
-            'products' => Product::all()->pluck('id'),
+            'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
