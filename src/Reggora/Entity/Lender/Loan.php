@@ -12,6 +12,13 @@ use Illuminate\Support\Collection;
  */
 final class Loan extends AbstractEntity {
 
+    /**@var array*/
+    private $expectedData = [
+        'id', 'loan_number', 'loan_officer', 'appraisal_type', 'due_date', 'created', 'updated', 'related_order', 
+        'subject_property_address', 'subject_property_city', 'subject_property_state', 'subject_property_zip', 
+        'case_number', 'loan_type',
+    ];
+
     /**
      * Find a loan by it's string id
      *
