@@ -58,9 +58,9 @@ class GuzzleAdapter {
      * @param array $params
      * @return ResponseInterface
      */
-    private function delete(String $url, Array $params = [])
+    private function delete(String $url, Array $params = [], Array $body = [])
     {
-        return $this->client->delete($url, ['query' => $params]);
+        return $this->client->delete($url, ['query' => $params, 'json' => $body]);
     }
 
     /**
