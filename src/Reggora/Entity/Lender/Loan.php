@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 final class Loan extends AbstractEntity {
 
     /**@var array*/
-    private $expectedData = [
+    protected $expectedData = [
         'id', 'loan_number', 'loan_officer', 'appraisal_type', 'due_date', 'created', 'updated', 'related_order', 
         'subject_property_address', 'subject_property_city', 'subject_property_state', 'subject_property_zip', 
         'case_number', 'loan_type',
@@ -45,7 +45,7 @@ final class Loan extends AbstractEntity {
      */
     public static function create(array $parameters)
 	{
-		$loan = Lender::getInstance()->getAdapter()->post('lender/loan/create', $parameters);
+		$loan = Lender::getInstance()->getAdapter()->post('lender/loan', $parameters);
 		return self::find($loan);
 	}
 

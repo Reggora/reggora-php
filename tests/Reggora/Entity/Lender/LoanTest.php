@@ -17,21 +17,20 @@ use Reggora\Entity\Lender\Loan;
  */
 final class LoanTest extends TestCase
 {
-
     /**
      * @covers \Reggora\Entity\Lender\Loan::find
      */
     public function testFind(): void
     {
         $loan = Loan::create([
-            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
             'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
-            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'officer' =>  uniqid(),
             'electronic_consent' =>  false
         ]);
 
@@ -46,14 +45,14 @@ final class LoanTest extends TestCase
     public function testCreate(): void
     {
         $loan = Loan::create([
-            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
             'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
-            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'officer' =>  uniqid(),
             'electronic_consent' =>  false
         ]);
 
@@ -67,14 +66,14 @@ final class LoanTest extends TestCase
     public function testDelete(): void
     {
         $loan = Loan::create([
-            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
             'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
-            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'officer' =>  uniqid(),
             'electronic_consent' =>  false
         ]);
 
@@ -90,14 +89,14 @@ final class LoanTest extends TestCase
     public function testSave(): void
     {
         $loan = Loan::create([
-            'number' =>  '5b3bbfdb4348380ddc56cd12',
+            'number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
             'subject_property_city' =>  'Boston',
             'subject_property_state' =>  'MA',
             'due_date' =>  date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z', //dynamic date so test doesnt fail in the future
-            'officer' =>  '5b3bbfdb4348380ddc56cd12',
+            'officer' =>  uniqid(),
             'electronic_consent' =>  false
         ]);
 

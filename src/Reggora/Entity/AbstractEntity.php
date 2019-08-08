@@ -11,9 +11,6 @@ abstract class AbstractEntity {
 	/**@var array*/
 	private $dirtyData = [];
 
-    /**@var array*/
-    private $expectedData;
-
     /**
      * AbstractEntity constructor.
      * @param array $data
@@ -25,10 +22,7 @@ abstract class AbstractEntity {
         $originalKeys = array_keys($this->originalData);
         $expectedKeys = array_values($this->expectedData);
 
-        sort($originalKeys);
-        sort($expectedKeys);
-
-        if($originalKeys !== $originalData) 
+        if($originalKeys !== $expectedKeys) 
         {
             throw new \Exception('Missing expected keys ' . implode(', ', array_diff($originalKeys, $expectedKeys)));
         }
