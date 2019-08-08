@@ -15,7 +15,7 @@ use Reggora\Entity\Lender\Vendor;
  *
  * @covers \Reggora\Entity\Lender\Vendor
  */
-class VendorTest extends TestCase
+final class VendorTest extends TestCase
 {
     /**
      * @covers \Reggora\Entity\Lender\Vendor::all

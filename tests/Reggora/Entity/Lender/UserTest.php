@@ -15,7 +15,7 @@ use Reggora\Entity\Lender\User;
  *
  * @covers \Reggora\Entity\Lender\User
  */
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
     /**
      * @covers \Reggora\Entity\Lender\User::find

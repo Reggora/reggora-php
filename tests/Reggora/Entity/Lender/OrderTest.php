@@ -15,7 +15,7 @@ use Reggora\Entity\Lender\Order;
  *
  * @covers \Reggora\Entity\Lender\Order
  */
-class OrderTest extends TestCase
+final class OrderTest extends TestCase
 {
     /**
      * @covers \Reggora\Entity\Lender\Order::all

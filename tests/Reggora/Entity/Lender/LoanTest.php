@@ -15,7 +15,7 @@ use Reggora\Entity\Lender\Loan;
  *
  * @covers \Reggora\Entity\Lender\Loan
  */
-class LoanTest extends TestCase
+final class LoanTest extends TestCase
 {
 
     /**

@@ -15,7 +15,7 @@ use Reggora\Entity\Lender\Product;
  *
  * @covers \Reggora\Entity\Lender\Product
  */
-class ProductTest extends TestCase
+final class ProductTest extends TestCase
 {
     /**
      * @covers \Reggora\Entity\Lender\Product::all
