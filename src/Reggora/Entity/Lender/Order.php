@@ -76,7 +76,7 @@ final class Order extends AbstractEntity {
 			'filters' => implode(',', $filters),
 		]);
 
-		foreach($orders['orders'] as $key => $data)
+		foreach($orders as $key => $data)
 		{
 			$orders[$key] = new Order($data);
 		}

@@ -27,9 +27,9 @@ abstract class AbstractEntity {
         sort($expectedKeys);
         sort($intersected);
 
-        if(array_intersect($originalKeys, $expectedKeys) === $expectedKeys) 
+        if($intersected !== $expectedKeys) 
         {
-            throw new \Exception('Missing expected keys ' . implode(', ', array_diff($originalKeys, $expectedKeys)));
+            throw new \Exception('Missing expected keys ' . implode(', ', array_diff($expectedKeys, $intersected)));
         }
 	}
 

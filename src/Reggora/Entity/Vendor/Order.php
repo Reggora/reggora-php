@@ -9,8 +9,8 @@ use Illuminate\Support\Collection;
 final class Order extends AbstractEntity {
 
 	/**@var array*/
-	private $expectedData = [
-		'id', 'status', 'priority', 'due_date', 'inspection_date', 'accepted_vendor', 'created', 'allocation_mode', 'requested_vendors', 'inspection_complete', 'products', 'loan_file'
+	protected $expectedData = [
+		'id', 'status', 'priority', 'due_date', 'inspection_date', 'accepted_vendor', 'created', 'allocation_mode', 'requested_vendors', 'inspection_complete', 'products', 'loan_file',
 	];
 
 	public $submissionsRelationship;
@@ -88,8 +88,7 @@ final class Order extends AbstractEntity {
 
 	public function cancel(array $params)
 	{
-		$order = Vendor::getInstance()->getAdapter()->delete(sprintf('vendor/order/%s/complete_inspection', $id), $params);
-		return self::find($order);
+		return Vendor::getInstance()->getAdapter()->delete(sprintf('vendor/order/%s/complete_inspection', $id), $params);
 	}
 
 	public function submissions()

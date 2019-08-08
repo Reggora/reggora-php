@@ -15,7 +15,7 @@ final class Product extends AbstractEntity {
 
 	public function all()
 	{
-		$products = Lender::getInstance()->getAdapter()->get('lender/product');
+		$products = Lender::getInstance()->getAdapter()->get('lender/products');
 		foreach($products['products'] as $key => $data)
 		{
 			$products[$key] = new Product($data);

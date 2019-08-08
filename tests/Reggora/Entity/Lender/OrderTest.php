@@ -5,6 +5,8 @@ namespace Test\Reggora\Entity\Lender;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Reggora\Entity\Lender\Order;
+use Reggora\Entity\Lender\Loan;
+use Reggora\Entity\Lender\Product;
 
 /**
  * Class OrderTest.
@@ -18,12 +20,19 @@ use Reggora\Entity\Lender\Order;
 final class OrderTest extends TestCase
 {
     /**
-     * @covers \Reggora\Entity\Lender\Order::all
+     * @covers \Reggora\Entity\Lender\Order::create
      */
-    public function testAll(): void
+    public function testCreate(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::create([
+            'allocation_type' => 'automatically',
+            'loan_id' => Loan::all()->first()->id,
+            'priority' => 'Rush',
+            'products' => Product::all()->pluck('id'),
+            'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+        ]);
+
+        $this->assertNotNull($order);
     }
 
     /**
@@ -31,17 +40,19 @@ final class OrderTest extends TestCase
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
+        $order = Order::create([
+            'allocation_type' => 'automatically',
+            'loan_id' => Loan::all()->first()->id,
+            'priority' => 'Rush',
+            'products' => Product::all()->pluck('id'),
+            'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+        ]);
 
-    /**
-     * @covers \Reggora\Entity\Lender\Order::create
-     */
-    public function testCreate(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertNotNull($order);
+
+        $foundOrder = Order::find($order->id);
+
+        $this->assertNotNull($foundOrder);
     }
 
     /**
@@ -49,8 +60,18 @@ final class OrderTest extends TestCase
      */
     public function testCancel(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::create([
+            'allocation_type' => 'automatically',
+            'loan_id' => Loan::all()->first()->id,
+            'priority' => 'Rush',
+            'products' => Product::all()->pluck('id'),
+            'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+        ]);
+
+        $this->assertNotNull($order);
+
+        $message = $order->cancel();
+        $this->assertEquals($message, 'Order has been canceled.');
     }
 
     /**
@@ -58,17 +79,23 @@ final class OrderTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
+        $order = Order::create([
+            'allocation_type' => 'automatically',
+            'loan_id' => Loan::all()->first()->id,
+            'priority' => 'Rush',
+            'products' => Product::all()->pluck('id'),
+            'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+        ]);
 
-    /**
-     * @covers \Reggora\Entity\Lender\Order::getIdentifier
-     */
-    public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertNotNull($order);
+
+        $order->due_date = date('Y-m-d', strtotime('+31 days')) . 'T10:10:46Z';
+        $order->save();
+
+        $savedOrder = Order::find($order->id);
+        $this->assertNotNull($savedOrder);
+
+        $this->assertNotEquals($order->due_date, $savedOrder->due_date);
     }
 
     /**
@@ -76,7 +103,27 @@ final class OrderTest extends TestCase
      */
     public function testSubmissions(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::create([
+            'allocation_type' => 'automatically',
+            'loan_id' => Loan::all()->first()->id,
+            'priority' => 'Rush',
+            'products' => Product::all()->pluck('id'),
+            'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+        ]);
+
+        $this->assertNotNull($order);
+
+        //todo...
+    }
+
+    /**
+     * @covers \Reggora\Entity\Lender\Order::all
+     */
+    public function testAll(): void
+    {
+        $all = Order::all();
+
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $all);
+        $this->assertNotEmpty($all->toArray());
     }
 }

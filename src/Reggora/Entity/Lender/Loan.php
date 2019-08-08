@@ -86,12 +86,13 @@ final class Loan extends AbstractEntity {
 			'loan_officer' => $loanOfficer,
 		]);
 
+        $collection = [];
 		foreach($loans['loans'] as $key => $data)
 		{
-			$loans[$key] = new Loan($data);
+			$collection[] = new Loan($data);
 		}
 
-		return new Collection($loans);
+		return new Collection($collection);
 	}
 
     /**
