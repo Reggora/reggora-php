@@ -76,12 +76,13 @@ final class Order extends AbstractEntity {
 			'filters' => implode(',', $filters),
 		]);
 
+		$collection = [];
 		foreach($orders as $key => $data)
 		{
-			$orders[$key] = new Order($data);
+			$collection = new Order($data);
 		}
 
-		return new Collection($orders);
+		return new Collection($collection);
 	}
 
     /**
@@ -106,7 +107,7 @@ final class Order extends AbstractEntity {
      */
     public static function create(array $parameters)
 	{
-		$order = Lender::getInstance()->getAdapter()->post('lender/order/create', $parameters);
+		$order = Lender::getInstance()->getAdapter()->post('lender/order', $parameters);
 		return self::find($order);
 	}
 
