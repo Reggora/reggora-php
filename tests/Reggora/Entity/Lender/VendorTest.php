@@ -79,13 +79,4 @@ class VendorTest extends TestCase
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
     }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Vendor::getIdentifier
-     */
-    public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
 }

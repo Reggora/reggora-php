@@ -18,15 +18,6 @@ use Reggora\Entity\Lender\Order;
 class OrderTest extends TestCase
 {
     /**
-     * @covers \Reggora\Entity\Lender\Order::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
      * @covers \Reggora\Entity\Lender\Order::all
      */
     public function testAll(): void
@@ -84,15 +75,6 @@ class OrderTest extends TestCase
      * @covers \Reggora\Entity\Lender\Order::submissions
      */
     public function testSubmissions(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\Order::products
-     */
-    public function testProducts(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
