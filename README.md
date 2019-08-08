@@ -107,7 +107,7 @@ Any of the query parameters found on (INSERT LINK HERE)[https://sandbox.reggora.
 
 use Reggora\Entity\Lender\Order;
 
-$orders = Orders::all(); //returns a Collection
+$orders = Order::all(); //returns a Collection
 ```
 
 #### Get an order by ID
@@ -140,6 +140,8 @@ $order = Order::create([
 	... //body found in the documentation
 ]);
 ```
+
+### Edit an order
 
 Because of our Entity style approach you can set any of an Orders elements as a property and use the `Order::save()` method to only upadate the "dirty" data.
 
@@ -216,4 +218,58 @@ $evault->uploadPS([
 
 $id = '...';
 $evault->deleteDocument($id);
+```
+
+### Products
+
+#### Get all products
+
+```php
+...
+
+use Reggora\Entity\Lender\Product;
+
+$products = Product::all(); //returns a Collection
+```
+
+#### Get a product by ID
+
+```php
+...
+
+use Reggora\Entity\Lender\Product;
+
+$id = '...';
+$product = Product::find($id);
+```
+
+#### Delete a product
+
+```php
+...
+
+$product->delete();
+```
+
+#### Create a product
+
+```php
+...
+
+use Reggora\Entity\Lender\Product;
+
+$product = Product::create([
+	... //body found in the documentation
+]);
+```
+
+#### Edit a product
+
+Because of our Entity style approach you can set any of an Products elements as a property and use the `Product::save()` method to only upadate the "dirty" data.
+
+```php
+...
+
+$product->product_name = 'My Renamed Product';
+$product->save();
 ```
