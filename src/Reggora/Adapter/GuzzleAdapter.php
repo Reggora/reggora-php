@@ -23,6 +23,7 @@ class GuzzleAdapter {
 		$this->client = new Client([
 			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URI : Reggora::BASE_PRODUCTION_API_URI,
             'http_errors' => false,
+            'verify' => false, 
 			'headers' => [
 				'Authorization' => sprintf('Bearer %s', $authToken),
 				'integration' => $integrationToken,
@@ -105,7 +106,7 @@ class GuzzleAdapter {
      * @param bool $sandbox
      * @return mixed
      */
-    private static function authenticateVendor(String $email, String $password, bool $sandbox)
+    public static function authenticateVendor(String $email, String $password, bool $sandbox)
     {
     	$tempClient = new Client([
 			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URI : Reggora::BASE_PRODUCTION_API_URI,
