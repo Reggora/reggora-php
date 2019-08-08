@@ -18,20 +18,6 @@ use Reggora\Entity\Lender\eVault;
 class eVaultTest extends TestCase
 {
     /**
-     * @var eVault $eVault An instance of "eVault" to test.
-     */
-    private $eVault;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->eVault = new eVault();
-    }
-
-    /**
      * @covers \Reggora\Entity\Lender\eVault::find
      */
     public function testFind(): void
@@ -71,15 +57,6 @@ class eVaultTest extends TestCase
      * @covers \Reggora\Entity\Lender\eVault::deleteDocument
      */
     public function testDeleteDocument(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Lender\eVault::getIdentifier
-     */
-    public function testGetIdentifier(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();

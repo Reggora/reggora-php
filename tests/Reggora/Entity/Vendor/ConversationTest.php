@@ -18,20 +18,6 @@ use Reggora\Entity\Vendor\Conversation;
 class ConversationTest extends TestCase
 {
     /**
-     * @var Conversation $conversation An instance of "Conversation" to test.
-     */
-    private $conversation;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->conversation = new Conversation();
-    }
-
-    /**
      * @covers \Reggora\Entity\Vendor\Conversation::find
      */
     public function testFind(): void
@@ -44,15 +30,6 @@ class ConversationTest extends TestCase
      * @covers \Reggora\Entity\Vendor\Conversation::sendMessage
      */
     public function testSendMessage(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Vendor\Conversation::getIdentifier
-     */
-    public function testGetIdentifier(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();

@@ -18,29 +18,6 @@ use Reggora\Entity\Vendor\Order;
 class OrderTest extends TestCase
 {
     /**
-     * @var Order $order An instance of "Order" to test.
-     */
-    private $order;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        /** @todo Maybe check arguments of this constructor. */
-        $this->order = new Order(["a", "strings", "array"]);
-    }
-
-    /**
-     * @covers \Reggora\Entity\Vendor\Order::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
      * @covers \Reggora\Entity\Vendor\Order::find
      */
     public function testFind(): void
@@ -125,15 +102,6 @@ class OrderTest extends TestCase
      * @covers \Reggora\Entity\Vendor\Order::uploadSubmission
      */
     public function testUploadSubmission(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \Reggora\Entity\Vendor\Order::getIdentifier
-     */
-    public function testGetIdentifier(): void
     {
         /** @todo Complete this unit test method. */
         $this->markTestIncomplete();
