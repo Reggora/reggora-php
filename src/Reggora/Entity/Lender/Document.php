@@ -8,6 +8,11 @@ use Illuminate\Support\Collection;
 
 final class Document extends AbstractEntity {
 
+	/**@var array*/
+	protected $expectedData = [
+		
+	];
+
 	public $evault_id;
 
 	public function __construct(array $data, string $evault_id)

@@ -8,6 +8,11 @@ use Illuminate\Support\Collection;
 
 final class Product extends AbstractEntity {
 
+	/**@var array*/
+	private $expectedData = [
+		'id', 'product_name', 'amount', 'inspection_type', 'requested_forms', 'geographic_pricing',
+	];
+
 	public function all()
 	{
 		$products = Lender::getInstance()->getAdapter()->get('lender/product');
