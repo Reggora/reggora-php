@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 final class Vendor extends AbstractEntity {
 
 	/**@var array*/
-	public $expectedData = [
+	private $expectedData = [
 		'id', 'firm_name', 'email', 'phone', 'accepting_jobs', 'lender_coverage',
 	];
 

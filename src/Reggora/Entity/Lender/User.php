@@ -16,7 +16,7 @@ final class User extends AbstractEntity {
     public $matched_users;
 
     /**@var array*/
-    public $expectedData = [
+    private $expectedData = [
         'id', 'email', 'phone_number', 'first_name', 'last_name', 'created', 'role',
     ];
 
@@ -100,7 +100,7 @@ final class User extends AbstractEntity {
             'search' => $search,
 		]);
 
-		foreach($users['users'] as $key => $data)
+		foreach($users as $key => $data)
 		{
 			$users[$key] = new self($data);
 		}

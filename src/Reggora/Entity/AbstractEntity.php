@@ -12,7 +12,7 @@ abstract class AbstractEntity {
 	private $dirtyData = [];
 
     /**@var array*/
-    public $expectedData;
+    private $expectedData;
 
     /**
      * AbstractEntity constructor.
