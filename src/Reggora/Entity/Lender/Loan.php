@@ -27,7 +27,7 @@ final class Loan extends AbstractEntity {
      */
     public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/loan/%s', $id));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/loan/%s', $id))['loan'];
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -86,7 +86,7 @@ final class Loan extends AbstractEntity {
 			'loan_officer' => $loanOfficer,
 		]);
 
-		foreach($loans as $key => $data)
+		foreach($loans['loans'] as $key => $data)
 		{
 			$loans[$key] = new Loan($data);
 		}

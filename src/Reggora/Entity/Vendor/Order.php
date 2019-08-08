@@ -30,7 +30,7 @@ final class Order extends AbstractEntity {
 
 	public static function find(string $id)
 	{
-		$json = Vendor::getInstance()->getAdapter()->get(sprintf('vendor/order/%s', $id));
+		$json = Vendor::getInstance()->getAdapter()->get(sprintf('vendor/order/%s', $id))['order'];
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -48,7 +48,7 @@ final class Order extends AbstractEntity {
 			'status' => $status,
 		]);
 
-		foreach($orders as $key => $data)
+		foreach($orders['orders'] as $key => $data)
 		{
 			$orders[$key] = new Order($data);
 		}

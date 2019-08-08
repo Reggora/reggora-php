@@ -76,7 +76,7 @@ final class Order extends AbstractEntity {
 			'filters' => implode(',', $filters),
 		]);
 
-		foreach($orders as $key => $data)
+		foreach($orders['orders'] as $key => $data)
 		{
 			$orders[$key] = new Order($data);
 		}
@@ -90,7 +90,7 @@ final class Order extends AbstractEntity {
      */
     public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/order/%s', $id));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/order/%s', $id))['order'];
 
 		if(!empty($json) && isset($json['id']))
 		{

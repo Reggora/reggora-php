@@ -26,7 +26,7 @@ final class Vendor extends AbstractEntity {
 
 	public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/vendor/%s', $id));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/vendor/%s', $id))['vendor'];
 
 		if(!empty($json) && isset($json['id']))
 		{

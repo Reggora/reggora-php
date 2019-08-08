@@ -44,7 +44,7 @@ final class User extends AbstractEntity {
      */
     public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/user/%s', $id));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/user/%s', $id))['user'];
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -100,7 +100,7 @@ final class User extends AbstractEntity {
             'search' => $search,
 		]);
 
-		foreach($users as $key => $data)
+		foreach($users['users'] as $key => $data)
 		{
 			$users[$key] = new self($data);
 		}
