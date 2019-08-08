@@ -44,7 +44,7 @@ final class User extends AbstractEntity {
      */
     public static function find(string $id)
 	{
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/user/%s', $id))['user'];
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/users/%s', $id))['user'];
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -72,7 +72,7 @@ final class User extends AbstractEntity {
      */
     public function delete()
 	{
-		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/user/%s', $this->id));
+		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/users/%s', $this->id));
 	}
 
     /**
@@ -80,7 +80,7 @@ final class User extends AbstractEntity {
      */
     public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/user/%s', $this->id), $this->getDirtyData());
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/users/%s', $this->id), $this->getDirtyData());
 		$this->clean();
 	}
 
