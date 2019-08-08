@@ -5,12 +5,6 @@ use Illuminate\Support\Collection;
 
 final class EntityRelationship {
 
-    /**@var string*/
-	protected $adapterParentClass; //currently unused
-
-	/**@var string*/
-	protected $routeSlug; //currently unused
-
 	/**@var array*/
 	protected $entities;
 
