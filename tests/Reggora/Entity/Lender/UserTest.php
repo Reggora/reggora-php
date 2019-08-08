@@ -18,21 +18,22 @@ use Reggora\Entity\Lender\User;
 class UserTest extends TestCase
 {
     /**
-     * @covers \Reggora\Entity\Lender\User::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
      * @covers \Reggora\Entity\Lender\User::find
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $user = User::create([
+            'email' => 'jake@lynndigital.com',
+            'role' => 'admin',
+            'firstname' => 'Jake',
+            'lastname' => 'Casto',
+            'phone_number' => '+13367126489',
+        ]);
+
+        $foundUser = User::find($user->id);
+
+        $this->assertNotNull($foundUser);
+        $this->assertEquals($foundUser->id, $user->id);
     }
 
     /**
@@ -40,8 +41,15 @@ class UserTest extends TestCase
      */
     public function testInvite(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $user = User::invite([
+            'email' => 'jake@lynndigital.com',
+            'role' => 'admin',
+            'firstname' => 'Jake',
+            'lastname' => 'Casto',
+            'phone_number' => '+13367126489',
+        ]);
+
+        $this->assertEquals($user, 'Your invite has been sent');
     }
 
     /**
@@ -49,8 +57,17 @@ class UserTest extends TestCase
      */
     public function testDelete(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $user = User::create([
+            'email' => 'jake@lynndigital.com',
+            'role' => 'admin',
+            'firstname' => 'Jake',
+            'lastname' => 'Casto',
+            'phone_number' => '+13367126489',
+        ]);
+
+        $this->assertNotNull($user);
+        $user->delete();
+        $this->assertNull(User::find($user->id));
     }
 
     /**
@@ -58,8 +75,23 @@ class UserTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $user = User::create([
+            'email' => 'jake@lynndigital.com',
+            'role' => 'admin',
+            'firstname' => 'Jake',
+            'lastname' => 'Casto',
+            'phone_number' => '+13367126489',
+        ]);
+
+        $this->assertNotNull($user);
+
+        $user->phone_number = '+13368148746';
+        $user->save();
+
+        $savedUser = User::find($user->id);
+
+        $this->assertNotNull($savedUser);
+        $this->assertNotEquals($savedUser->phone_number, $user->phone_number);
     }
 
     /**
@@ -67,16 +99,9 @@ class UserTest extends TestCase
      */
     public function testAll(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
+        $all = User::all();
 
-    /**
-     * @covers \Reggora\Entity\Lender\User::getIdentifier
-     */
-    public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $all);
+        $this->assertNotEmpty($all->toArray());
     }
 }
