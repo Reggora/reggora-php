@@ -16,9 +16,9 @@ class GuzzleAdapter {
      * GuzzleAdapter constructor.
      * @param String $authToken
      * @param String $integrationToken
-     * @param boolean $sandbox
+     * @param bool $sandbox
      */
-    public function __construct(String $authToken, String $integrationToken, boolean $sandbox)
+    public function __construct(String $authToken, String $integrationToken, bool $sandbox)
 	{
 		$this->client = new Client([
 			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,
@@ -79,10 +79,10 @@ class GuzzleAdapter {
     /**
      * @param String $email
      * @param String $password
-     * @param boolean $sandbox
+     * @param bool $sandbox
      * @return mixed
      */
-    public static function authenticateLender(String $email, String $password, boolean $sandbox)
+    public static function authenticateLender(String $email, String $password, bool $sandbox)
     {
     	$tempClient = new Client([
 			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,
@@ -102,10 +102,10 @@ class GuzzleAdapter {
     /**
      * @param String $email
      * @param String $password
-     * @param boolean $sandbox
+     * @param bool $sandbox
      * @return mixed
      */
-    private static function authenticateVendor(String $email, String $password, boolean $sandbox)
+    private static function authenticateVendor(String $email, String $password, bool $sandbox)
     {
     	$tempClient = new Client([
 			'base_uri' => $sandbox ? Reggora::BASE_SANDBOX_API_URL : Reggora::BASE_PRODUCTION_API_URL,

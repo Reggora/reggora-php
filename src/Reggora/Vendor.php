@@ -16,9 +16,9 @@ final class Lender {
      * @param String $email
      * @param String $password
      * @param String $integrationToken
-     * @param boolean $sandbox
+     * @param bool $sandbox
      */
-    public function __construct(String $email, String $password, String $integrationToken, boolean $sandbox = true)
+    public function __construct(String $email, String $password, String $integrationToken, bool $sandbox = true)
     {
         $authenticationInformation = GuzzleAdapter::authenticateVendor($email, $password, $sandbox);
 
