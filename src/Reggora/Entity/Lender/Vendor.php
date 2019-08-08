@@ -8,6 +8,11 @@ use Illuminate\Support\Collection;
 
 final class Vendor extends AbstractEntity {
 
+	/**@var array*/
+	public $expectedData = [
+		'id', 'firm_name', 'email', 'phone', 'accepting_jobs', 'lender_coverage',
+	];
+
 	public function all()
 	{
 		$vendors = Lender::getInstance()->getAdapter()->get('lender/vendor');

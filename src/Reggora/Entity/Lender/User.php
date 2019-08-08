@@ -15,6 +15,11 @@ final class User extends AbstractEntity {
     /**@var Collection|null*/
     public $matched_users;
 
+    /**@var array*/
+    public $expectedData = [
+        'id', 'email', 'phone_number', 'first_name', 'last_name', 'created', 'role',
+    ];
+
     public function __construct(array $data)
     {
         parent::__construct($data);

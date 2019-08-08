@@ -23,6 +23,11 @@ final class Order extends AbstractEntity {
 	/**@var EntityRelationship*/
 	public $products;
 
+	/**@var array*/
+	protected $expectedData = [
+		'id', 'status', 'priority', 'due_date', 'inspection_date', 'accepted_vendor', 'created', 'allocation_mode', 'requested_vendors', 'inspection_complete', 'products', 'loan_file',
+	];
+
     /**
      * Order constructor.
      * @param array $data
@@ -51,8 +56,6 @@ final class Order extends AbstractEntity {
 		{
 			$this->products = new EntityRelationship(Lender::class, 'product', $data['products']);
 		}
-
-		//todo: `loan_files` ?
 	}
 
     /**
