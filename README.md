@@ -273,3 +273,5 @@ Because of our Entity style approach you can set any of an Products elements as 
 $product->product_name = 'My Renamed Product';
 $product->save();
 ```
+
+//todo finish docs
