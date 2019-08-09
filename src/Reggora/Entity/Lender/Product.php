@@ -51,7 +51,7 @@ final class Product extends AbstractEntity {
 
 	public function save()
 	{
-		Lender::getInstance()->getAdapter()->put(sprintf('lender/product/%s', $id), $this->getDirtyData());
+		Lender::getInstance()->getAdapter()->put(sprintf('lender/product/%s', $this->id), $this->getDirtyData());
 		$this->clean();
 	}
 

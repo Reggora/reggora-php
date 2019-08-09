@@ -22,8 +22,10 @@ final class ProductTest extends TestCase
      */
     public function testAll(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $all = Product::all();
+
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $all);
+        $this->assertNotEmpty($all->toArray());
     }
 
     /**
@@ -31,8 +33,17 @@ final class ProductTest extends TestCase
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $product = Product::create([
+            'product_name' => 'My Sample Product ' . uniqid(),
+            'amount' => 5000,
+            'inspection_type' => 'interior',
+        ]);
+
+        $this->assertNotNull($product);
+
+        $foundProduct = Product::find($product->id);
+        $this->assertNotNull($foundProduct);
+        $this->assertEquals($foundProduct->id, $product->id);
     }
 
     /**
@@ -40,8 +51,13 @@ final class ProductTest extends TestCase
      */
     public function testCreate(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $product = Product::create([
+            'product_name' => 'My Sample Product ' . uniqid(),
+            'amount' => 5000,
+            'inspection_type' => 'interior',
+        ]);
+
+        $this->assertNotNull($product);
     }
 
     /**
@@ -49,8 +65,18 @@ final class ProductTest extends TestCase
      */
     public function testDelete(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $product = Product::create([
+            'product_name' => 'My Sample Product ' . uniqid(),
+            'amount' => 5000,
+            'inspection_type' => 'interior',
+        ]);
+        
+        $this->assertNotNull($product);
+
+        $product->delete();
+
+        $foundProduct = Product::find($product->id);
+        $this->assertNull($foundProduct);
     }
 
     /**
@@ -58,16 +84,21 @@ final class ProductTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
+        $product = Product::create([
+            'product_name' => 'My Sample Product ' . uniqid(),
+            'amount' => 5000,
+            'inspection_type' => 'interior',
+        ]);
 
-    /**
-     * @covers \Reggora\Entity\Lender\Product::getIdentifier
-     */
-    public function testGetIdentifier(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertNotNull($product);
+
+        $product->product_name = 'My New Product Name';
+        $product->amount = 10000;
+        $product->save();
+
+        $foundProduct = Product::find($product->id);
+        $this->assertNotNull($foundProduct);
+
+        $this->assertEquals($foundProduct->product_name, $product->product_name);
     }
 }
