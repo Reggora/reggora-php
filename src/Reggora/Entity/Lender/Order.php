@@ -67,7 +67,7 @@ final class Order extends AbstractEntity {
      * @param array $filters
      * @return Collection
      */
-    public static function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = null, $filters = [])
+    public static function all(int $offset = 0, int $limit = 0, string $ordering = '-created', $loanOfficer = [], $filters = [])
 	{
 		$orders = Lender::getInstance()->getAdapter()->get('lender/orders', [
 			'offset' => $offset,
