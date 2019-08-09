@@ -117,7 +117,7 @@ final class Order extends AbstractEntity {
      */
     public function cancel()
 	{
-		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/order/%s', $this->id));
+		return Lender::getInstance()->getAdapter()->delete(sprintf('lender/order/%s/cancel', $this->id));
 	}
 
     /**

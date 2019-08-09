@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Reggora\Entity\Lender\Order;
 use Reggora\Entity\Lender\Loan;
 use Reggora\Entity\Lender\Product;
+use Reggora\Helpers\LenderHelper;
 
 /**
  * Class OrderTest.
@@ -26,9 +27,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan' => Loan::all()->shuffle()->first()->id,
+            'loan' => LenderHelper::generateRandomLoan()->id,
             'priority' => 'Rush',
-            'products' => [Product::all()->first()->id],
+            'products' => [LenderHelper::generateRandomProduct()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -42,9 +43,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan_id' => Loan::all()->first()->id,
+            'loan' => LenderHelper::generateRandomLoan()->id,
             'priority' => 'Rush',
-            'products' => [Product::all()->first()->id],
+            'products' => [LenderHelper::generateRandomProduct()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -62,9 +63,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan_id' => Loan::all()->first()->id,
+            'loan' => LenderHelper::generateRandomLoan()->id,
             'priority' => 'Rush',
-            'products' => [Product::all()->first()->id],
+            'products' => [LenderHelper::generateRandomProduct()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -81,9 +82,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan_id' => Loan::all()->first()->id,
+            'loan' => LenderHelper::generateRandomLoan()->id,
             'priority' => 'Rush',
-            'products' => [Product::all()->first()->id],
+            'products' => [LenderHelper::generateRandomProduct()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
@@ -105,9 +106,9 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan_id' => Loan::all()->first()->id,
+            'loan' => LenderHelper::generateRandomLoan()->id,
             'priority' => 'Rush',
-            'products' => [Product::all()->first()->id],
+            'products' => [LenderHelper::generateRandomProduct()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
         ]);
 
