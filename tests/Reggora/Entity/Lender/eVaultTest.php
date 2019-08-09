@@ -5,6 +5,8 @@ namespace Test\Reggora\Entity\Lender;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Reggora\Entity\Lender\eVault;
+use Reggora\Entity\Lender\Order;
+use Reggora\Helpers\LenderHelper;
 
 /**
  * Class eVaultTest.
@@ -22,17 +24,48 @@ class eVaultTest extends TestCase
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::all()->first();
+        if($order === null)
+        {
+            $order = Order::create([
+                'allocation_type' => 'automatically',
+                'loan' => LenderHelper::generateRandomLoan()->id,
+                'priority' => 'Rush',
+                'products' => [LenderHelper::generateRandomProduct()->id],
+                'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+            ]);
+        }
+
+        $this->assertNotNull($order);
+        $this->assertNotNull($order->evault);
+
+        $eVault = eVault::find($order->evault);
+        $this->assertNotNull($eVault);
     }
 
     /**
      * @covers \Reggora\Entity\Lender\eVault::getDocument
+     * @depends testUploadDocument
      */
     public function testGetDocument(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::all()->first();
+        if($order === null)
+        {
+            $order = Order::create([
+                'allocation_type' => 'automatically',
+                'loan' => LenderHelper::generateRandomLoan()->id,
+                'priority' => 'Rush',
+                'products' => [LenderHelper::generateRandomProduct()->id],
+                'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+            ]);
+        }
+
+        $this->assertNotNull($order);
+        $this->assertNotNull($order->evault);
+
+        $eVault = eVault::find($order->evault);
+        $this->assertNotNull($eVault);
     }
 
     /**

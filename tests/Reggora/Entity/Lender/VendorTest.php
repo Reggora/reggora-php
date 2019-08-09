@@ -22,8 +22,8 @@ final class VendorTest extends TestCase
      */
     public function testAll(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $all = Vendor::all();
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $all);
     }
 
     /**
@@ -31,8 +31,7 @@ final class VendorTest extends TestCase
      */
     public function testFind(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 
     /**
@@ -40,8 +39,7 @@ final class VendorTest extends TestCase
      */
     public function testFindByBranch(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 
     /**
@@ -49,8 +47,7 @@ final class VendorTest extends TestCase
      */
     public function testFindByZone(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 
     /**
@@ -58,8 +55,7 @@ final class VendorTest extends TestCase
      */
     public function testInvite(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 
     /**
@@ -67,8 +63,7 @@ final class VendorTest extends TestCase
      */
     public function testDelete(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 
     /**
@@ -76,7 +71,6 @@ final class VendorTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+
     }
 }
