@@ -29,7 +29,13 @@ abstract class AbstractEntity {
 
         if($intersected !== $expectedKeys) 
         {
-            throw new \Exception('Missing expected keys ' . implode(', ', array_diff($expectedKeys, $intersected)));
+            foreach (array_diff($expectedKeys, $intersected) as $key)
+            {
+                if(!in_array($key, $expectedKeys))
+                {
+                    throw new \Exception('Missing expected keys ' . implode(', ', array_diff($expectedKeys, $intersected)));
+                }
+            }
         }
 	}
 

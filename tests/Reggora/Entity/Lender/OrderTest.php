@@ -26,7 +26,7 @@ final class OrderTest extends TestCase
     {
         $order = Order::create([
             'allocation_type' => 'automatically',
-            'loan' => Loan::all()->first()->id,
+            'loan' => Loan::all()->shuffle()->first()->id,
             'priority' => 'Rush',
             'products' => [Product::all()->first()->id],
             'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',

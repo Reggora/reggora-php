@@ -23,7 +23,7 @@ final class LoanTest extends TestCase
     public function testFind(): void
     {
         $loan = Loan::create([
-            'number' =>  uniqid(),
+            'loan_number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
@@ -45,7 +45,7 @@ final class LoanTest extends TestCase
     public function testCreate(): void
     {
         $loan = Loan::create([
-            'number' =>  uniqid(),
+            'loan_number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
@@ -66,7 +66,7 @@ final class LoanTest extends TestCase
     public function testDelete(): void
     {
         $loan = Loan::create([
-            'number' =>  uniqid(),
+            'loan_number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',
@@ -89,7 +89,7 @@ final class LoanTest extends TestCase
     public function testSave(): void
     {
         $loan = Loan::create([
-            'number' =>  uniqid(),
+            'loan_number' =>  uniqid(),
             'appraisal_type' =>  'refinance',
             'subject_property_address' =>  '695 Atlantic St',
             'subject_property_zip' =>  '02134',

@@ -3,6 +3,7 @@ namespace Reggora\Entity\Lender;
 
 use Reggora\Lender;
 use Reggora\Entity\AbstractEntity;
+use Reggora\Entity\EntityRelationship;
 
 use Illuminate\Support\Collection;
 
@@ -77,9 +78,9 @@ final class Order extends AbstractEntity {
 		]);
 
 		$collection = [];
-		foreach($orders as $key => $data)
+		foreach($orders['orders'] as $key => $data)
 		{
-			$collection = new Order($data);
+			$collection[] = new Order($data);
 		}
 
 		return new Collection($collection);
