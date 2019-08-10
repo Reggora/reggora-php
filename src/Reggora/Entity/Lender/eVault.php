@@ -13,12 +13,12 @@ use Illuminate\Support\Collection;
 final class eVault extends AbstractEntity {
 
     /**@var array*/
-    private $expectedData = [
+    protected $expectedData = [
         'id', 'documents',
     ];
 
     public function find(string $id) {
-		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/evault/%s', $id));
+		$json = Lender::getInstance()->getAdapter()->get(sprintf('lender/evault/%s', $id))['evault'];
 
 		if(!empty($json) && isset($json['id']))
 		{
@@ -33,7 +33,7 @@ final class eVault extends AbstractEntity {
     }
 
     public function uploadDocument(array $parameters) {
-    	return Lender::getInstance()->getAdapter()->put(sprintf('lender/evault'), array_merge(
+    	return Lender::getInstance()->getAdapter()->post(sprintf('lender/evault'), array_merge(
     		$parameters, 
     		[
     			'id' => $this->id
@@ -42,16 +42,11 @@ final class eVault extends AbstractEntity {
     }
 
     public function uploadPS(array $parameters) {
-    	return Lender::getInstance()->getAdapter()->put(sprintf('lender/order/p_and_s'), array_merge(
-    		$parameters, 
-    		[
-    			'id' => $this->id
-    		]
-    	));
+    	return Lender::getInstance()->getAdapter()->post(sprintf('lender/p_and_s'), $parameters);
     }
 
     public function deleteDocument(string $id) {
-    	return Lender::getInstance()->getAdapter()->delete(sprintf('lender/order/p_and_s'), [], [
+    	return Lender::getInstance()->getAdapter()->delete(sprintf('lender/evault'), [], [
     		'id' => $this->id,
     		'document_id' => $id,
     	]);

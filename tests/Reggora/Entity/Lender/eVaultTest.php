@@ -40,6 +40,7 @@ class eVaultTest extends TestCase
         $this->assertNotNull($order->evault);
 
         $eVault = eVault::find($order->evault);
+
         $this->assertNotNull($eVault);
     }
 
@@ -66,6 +67,16 @@ class eVaultTest extends TestCase
 
         $eVault = eVault::find($order->evault);
         $this->assertNotNull($eVault);
+
+        $id = $eVault->uploadDocument([
+            'file' => base64_encode(file_get_contents(__DIR__ . '/../../../../sample/sample.pdf')),
+        ]);
+
+        $this->assertNotNull($id);
+
+        $document = $eVault->getDocument($id);
+        $this->assertNotNull($document);
+        $this->assertIsIterable($document);//check if array
     }
 
     /**
@@ -73,8 +84,29 @@ class eVaultTest extends TestCase
      */
     public function testUploadDocument(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::all()->first();
+        if($order === null)
+        {
+            $order = Order::create([
+                'allocation_type' => 'automatically',
+                'loan' => LenderHelper::generateRandomLoan()->id,
+                'priority' => 'Rush',
+                'products' => [LenderHelper::generateRandomProduct()->id],
+                'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+            ]);
+        }
+
+        $this->assertNotNull($order);
+        $this->assertNotNull($order->evault);
+
+        $eVault = eVault::find($order->evault);
+        $this->assertNotNull($eVault);
+
+        $id = $eVault->uploadDocument([
+            'file' => base64_encode(file_get_contents(__DIR__ . '/../../../../sample/sample.pdf')),
+        ]);
+
+        $this->assertNotNull($id);
     }
 
     /**
@@ -82,8 +114,30 @@ class eVaultTest extends TestCase
      */
     public function testUploadPS(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::all()->first();
+        if($order === null)
+        {
+            $order = Order::create([
+                'allocation_type' => 'automatically',
+                'loan' => LenderHelper::generateRandomLoan()->id,
+                'priority' => 'Rush',
+                'products' => [LenderHelper::generateRandomProduct()->id],
+                'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+            ]);
+        }
+
+        $this->assertNotNull($order);
+        $this->assertNotNull($order->evault);
+
+        $eVault = eVault::find($order->evault);
+        $this->assertNotNull($eVault);
+
+        $id = $eVault->uploadPS([
+            'file' => base64_encode(file_get_contents(__DIR__ . '/../../../../sample/sample.pdf')),
+            'id' => $order->id,
+        ]);
+
+        $this->assertNotNull($id);
     }
 
     /**
@@ -91,7 +145,37 @@ class eVaultTest extends TestCase
      */
     public function testDeleteDocument(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $order = Order::all()->first();
+        if($order === null)
+        {
+            $order = Order::create([
+                'allocation_type' => 'automatically',
+                'loan' => LenderHelper::generateRandomLoan()->id,
+                'priority' => 'Rush',
+                'products' => [LenderHelper::generateRandomProduct()->id],
+                'due_date' => date('Y-m-d', strtotime('+30 days')) . 'T10:10:46Z',
+            ]);
+        }
+
+        $this->assertNotNull($order);
+        $this->assertNotNull($order->evault);
+
+        $eVault = eVault::find($order->evault);
+        $this->assertNotNull($eVault);
+
+        $id = $eVault->uploadDocument([
+            'file' => base64_encode(file_get_contents(__DIR__ . '/../../../../sample/sample.pdf')),
+        ]);
+
+        $this->assertNotNull($id);
+
+        $document = $eVault->getDocument($id);
+        $this->assertNotNull($document);
+        $this->assertIsIterable($document);//check if array
+
+        $eVault->deleteDocument($id);
+
+        $foundDocument = $eVault->getDocument($id);
+        $this->assertNull($foundDocument);
     }
 }
