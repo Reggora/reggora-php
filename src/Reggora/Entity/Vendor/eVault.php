@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 final class eVault extends AbstractEntity {
 
     /**@var array*/
-    private $expectedData = [
+    protected $expectedData = [
         'id', 'documents',
     ];
 
@@ -42,10 +42,7 @@ final class eVault extends AbstractEntity {
     }
 
     public function deleteDocument(string $id) {
-    	return Vendor::getInstance()->getAdapter()->delete(sprintf('vendor/order/p_and_s'), [], [
-    		'id' => $this->id,
-    		'document_id' => $id,
-    	]);
+    	return Vendor::getInstance()->getAdapter()->delete(sprintf('vendor/evault/%s/%s', $this->id, $id));
     }
 
     /**

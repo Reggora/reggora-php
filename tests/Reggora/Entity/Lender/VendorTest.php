@@ -31,7 +31,12 @@ final class VendorTest extends TestCase
      */
     public function testFind(): void
     {
-
+        $vendor = Vendor::all()->first();
+        if($vendor !== null)
+        {
+            $foundVendor = Vendor::find($vendor->id);
+            $this->assertNotNull($foundVendor->id);
+        }
     }
 
     /**

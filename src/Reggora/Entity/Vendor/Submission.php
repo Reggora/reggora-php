@@ -10,6 +10,8 @@ final class Submission extends AbstractEntity {
 
 	protected $order;
 
+	protected $expectedData = [/** we dont validate this */];
+
 	public function __construct(array $data, Order $order)
 	{
 		parent::__construct($data, $order);
